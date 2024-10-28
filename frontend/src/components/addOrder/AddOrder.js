@@ -368,7 +368,8 @@ const AddOrder = (props) => {
           receivedDateForDisplay: configurationProperties.currentDateAsText,
           nextVisitDate: configurationProperties.currentDateAsText,
           receivedTime: configurationProperties.currentTimeAsText,
-          labNo: "24000001"
+          labNo: "24000001",
+          referringSiteName:"10 - HG Abobo Nord",
         },
       });
     }
@@ -593,34 +594,18 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
+            {showRequesterFields && (
+              <>
             <Column lg={8} md={4} sm={4}>
-              <AutoComplete
-                name="siteName"
-                id="siteName"
-                allowFreeText={
-                  !(
-                    configurationProperties.restrictFreeTextRefSiteEntry ===
-                    "true"
-                  )
-                }
-                value={
-                  orderFormValues.sampleOrderItems.referringSiteId != ""
-                    ? orderFormValues.sampleOrderItems.referringSiteId
-                    : orderFormValues.sampleOrderItems.referringSiteName
-                }
-                onChange={handleSiteName}
-                onSelect={handleAutoCompleteSiteName}
-                label={
-                  <>
-                    <FormattedMessage id="order.search.site.name" />{" "}
-                    <span className="requiredlabel">*</span>
-                  </>
-                }
-                style={{ width: "!important 100%" }}
-                suggestions={siteNames.length > 0 ? siteNames : []}
-                required
+              <TextInput
+                  name="siteName"
+                  labelText={intl.formatMessage({
+                    id: "order.search.site.name",
+                  })}
+                  value={orderFormValues.sampleOrderItems.referringSiteName}
+                  readOnly // Campo de solo lectura
+                  id="siteName"
               />
-              {/* )} */}
             </Column>
             <Column lg={8} md={4} sm={4}>
               <Select
@@ -680,8 +665,7 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            {showRequesterFields && (
-                <>
+
                   <Column lg={8} md={4} sm={4}>
                     <TextInput
                         name="requesterFirstName"
