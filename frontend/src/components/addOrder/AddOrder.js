@@ -38,7 +38,7 @@ const AddOrder = (props) => {
   const [siteNames, setSiteNames] = useState([]);
   const [innitialized, setInnitialized] = useState(false);
   const [departments, setDepartments] = useState([]);
-
+  const [showRequesterFields, setShowRequesterFields] = useState(false);
   useEffect(() => {
     componentMounted.current = true;
     getFromOpenElisServer("/rest/SamplePatientEntry", getSampleEntryPreform);
@@ -368,6 +368,7 @@ const AddOrder = (props) => {
           receivedDateForDisplay: configurationProperties.currentDateAsText,
           nextVisitDate: configurationProperties.currentDateAsText,
           receivedTime: configurationProperties.currentTimeAsText,
+          labNo: "24-000-001"
         },
       });
     }
@@ -679,125 +680,114 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} md={4} sm={4}>
-              <TextInput
-                name="requesterFirstName"
-                placeholder={intl.formatMessage({
-                  id: "input.placeholder.requesterFirstName",
-                })}
-                labelText={
-                  <>
-                    <FormattedMessage id="order.requester.firstName.label" />
-                    <span className="requiredlabel">*</span>
-                  </>
-                }
-                disabled={
-                  configurationProperties.restrictFreeTextProviderEntry ===
-                  "true"
-                }
-                onChange={handleRequesterFirstName}
-                value={orderFormValues.sampleOrderItems.providerFirstName}
-                invalid={
-                  error("sampleOrderItems.providerFirstName") ? true : false
-                }
-                invalidText={error("sampleOrderItems.providerFirstName")}
-                id="requesterFirstName"
-              />
-            </Column>
+            {showRequesterFields && (
+                <>
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                        name="requesterFirstName"
+                        placeholder={intl.formatMessage({
+                          id: "input.placeholder.requesterFirstName",
+                        })}
+                        labelText={
+                          <>
+                            <FormattedMessage id="order.requester.firstName.label" />
+                            <span className="requiredlabel">*</span>
+                          </>
+                        }
+                        disabled={
+                            configurationProperties.restrictFreeTextProviderEntry === "true"
+                        }
+                        onChange={handleRequesterFirstName}
+                        value={orderFormValues.sampleOrderItems.providerFirstName}
+                        invalid={error("sampleOrderItems.providerFirstName") ? true : false}
+                        invalidText={error("sampleOrderItems.providerFirstName")}
+                        id="requesterFirstName"
+                    />
+                  </Column>
 
-            <Column lg={8} md={4} sm={4}>
-              <TextInput
-                name="requesterLastName"
-                placeholder={intl.formatMessage({
-                  id: "input.placeholder.requesterLastName",
-                })}
-                labelText={
-                  <>
-                    <FormattedMessage id="order.requester.lastName.label" />
-                    <span className="requiredlabel">*</span>
-                  </>
-                }
-                disabled={
-                  configurationProperties.restrictFreeTextProviderEntry ===
-                  "true"
-                }
-                value={orderFormValues.sampleOrderItems.providerLastName}
-                onChange={handleRequesterLastName}
-                id="requesterLastName"
-                invalid={
-                  error("sampleOrderItems.providerLastName") ? true : false
-                }
-                invalidText={error("sampleOrderItems.providerLastName")}
-              />
-            </Column>
-            <Column lg={16} md={8} sm={3}>
-              {" "}
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-            </Column>
-            <Column lg={8} sm={4}>
-              <TextInput
-                name="providerWorkPhone"
-                placeholder={intl.formatMessage({
-                  id: "input.placeholder.providerWorkPhone",
-                })}
-                disabled={
-                  configurationProperties.restrictFreeTextProviderEntry ===
-                  "true"
-                }
-                onChange={handleRequesterWorkPhone}
-                value={orderFormValues.sampleOrderItems.providerWorkPhone}
-                onMouseLeave={handlePhoneNoValidation}
-                labelText={intl.formatMessage({
-                  id: "order.requester.phone.label",
-                })}
-                id="providerWorkPhoneId"
-              />
-            </Column>
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                        name="requesterLastName"
+                        placeholder={intl.formatMessage({
+                          id: "input.placeholder.requesterLastName",
+                        })}
+                        labelText={
+                          <>
+                            <FormattedMessage id="order.requester.lastName.label" />
+                            <span className="requiredlabel">*</span>
+                          </>
+                        }
+                        disabled={
+                            configurationProperties.restrictFreeTextProviderEntry === "true"
+                        }
+                        value={orderFormValues.sampleOrderItems.providerLastName}
+                        onChange={handleRequesterLastName}
+                        id="requesterLastName"
+                        invalid={error("sampleOrderItems.providerLastName") ? true : false}
+                        invalidText={error("sampleOrderItems.providerLastName")}
+                    />
+                  </Column>
 
-            <Column lg={8} md={4} sm={4}>
-              <TextInput
-                name="providerFax"
-                placeholder={intl.formatMessage({
-                  id: "input.placeholder.providerFax",
-                })}
-                labelText={intl.formatMessage({
-                  id: "order.requester.fax.label",
-                })}
-                disabled={
-                  configurationProperties.restrictFreeTextProviderEntry ===
-                  "true"
-                }
-                onChange={handleRequesterFax}
-                value={orderFormValues.sampleOrderItems.providerFax}
-                id="providerFaxId"
-              />
-            </Column>
-            <Column lg={16} md={8} sm={3}>
-              {" "}
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-            </Column>
-            <Column lg={8} md={4} sm={4}>
-              <TextInput
-                name="providerEmail"
-                placeholder={intl.formatMessage({
-                  id: "input.placeholder.providerEmail",
-                })}
-                labelText={intl.formatMessage({
-                  id: "order.requester.email.label",
-                })}
-                disabled={
-                  configurationProperties.restrictFreeTextProviderEntry ===
-                  "true"
-                }
-                onChange={handleRequesterEmail}
-                value={orderFormValues.sampleOrderItems.providerEmail}
-                id="providerEmailId"
-                invalid={error("sampleOrderItems.providerEmail") ? true : false}
-                invalidText={intl.formatMessage({
-                  id: "error.invalid.email",
-                })}
-              />
-            </Column>
+                  <Column lg={8} sm={4}>
+                    <TextInput
+                        name="providerWorkPhone"
+                        placeholder={intl.formatMessage({
+                          id: "input.placeholder.providerWorkPhone",
+                        })}
+                        disabled={
+                            configurationProperties.restrictFreeTextProviderEntry === "true"
+                        }
+                        onChange={handleRequesterWorkPhone}
+                        value={orderFormValues.sampleOrderItems.providerWorkPhone}
+                        onMouseLeave={handlePhoneNoValidation}
+                        labelText={intl.formatMessage({
+                          id: "order.requester.phone.label",
+                        })}
+                        id="providerWorkPhoneId"
+                    />
+                  </Column>
+
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                        name="providerFax"
+                        placeholder={intl.formatMessage({
+                          id: "input.placeholder.providerFax",
+                        })}
+                        labelText={intl.formatMessage({
+                          id: "order.requester.fax.label",
+                        })}
+                        disabled={
+                            configurationProperties.restrictFreeTextProviderEntry === "true"
+                        }
+                        onChange={handleRequesterFax}
+                        value={orderFormValues.sampleOrderItems.providerFax}
+                        id="providerFaxId"
+                    />
+                  </Column>
+
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                        name="providerEmail"
+                        placeholder={intl.formatMessage({
+                          id: "input.placeholder.providerEmail",
+                        })}
+                        labelText={intl.formatMessage({
+                          id: "order.requester.email.label",
+                        })}
+                        disabled={
+                            configurationProperties.restrictFreeTextProviderEntry === "true"
+                        }
+                        onChange={handleRequesterEmail}
+                        value={orderFormValues.sampleOrderItems.providerEmail}
+                        id="providerEmailId"
+                        invalid={error("sampleOrderItems.providerEmail") ? true : false}
+                        invalidText={intl.formatMessage({
+                          id: "error.invalid.email",
+                        })}
+                    />
+                  </Column>
+                </>
+            )}
 
             <Column lg={8} md={4} sm={4}>
               <Select
