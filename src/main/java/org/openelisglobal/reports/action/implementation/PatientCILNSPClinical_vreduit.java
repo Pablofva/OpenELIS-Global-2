@@ -59,22 +59,14 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
     static {
         analysisStatusIds = new HashSet<>();
         validatedAnalysisStatusIds = new HashSet<>();
-        analysisStatusIds.add(Integer
-                .parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.BiologistRejected)));
-        analysisStatusIds.add(
-                Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Finalized)));
-        analysisStatusIds.add(Integer.parseInt(
-                SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.NonConforming_depricated)));
-        analysisStatusIds.add(
-                Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.NotStarted)));
-        analysisStatusIds.add(Integer
-                .parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.TechnicalAcceptance)));
-        analysisStatusIds.add(
-                Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Canceled)));
-        analysisStatusIds.add(Integer
-                .parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.TechnicalRejected)));
-        validatedAnalysisStatusIds.add(
-                Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Finalized)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.BiologistRejected)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Finalized)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.NonConforming_depricated)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.NotStarted)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.TechnicalAcceptance)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Canceled)));
+        analysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.TechnicalRejected)));
+        validatedAnalysisStatusIds.add(Integer.parseInt(SpringContext.getBean(IStatusService.class).getStatusID(AnalysisStatus.Finalized)));
     }
 
     static final String configName = ConfigurationProperties.getInstance().getPropertyValue(Property.configurationName);
@@ -86,7 +78,6 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
     @Override
     protected String reportFileName() {
         return "PatientReportCDI_vreduit";
-        // return "PatientClinicalReport";
     }
 
     @Override
@@ -159,9 +150,6 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
                     if (currentAnalysis.isReferredOut()) {
                         Referral referral = referralService.getReferralByAnalysisId(currentAnalysis.getId());
                         if (referral != null) {
-                            // addReferredTests method in both PatientClinical and PatientCILNSPClinical are
-                            // nearly identical and
-                            // should be refactored to use the same code.
                             List<ClinicalPatientData> referredData = addReferredTests(referral, resultsData);
                             currentSampleReportItems.addAll(referredData);
                         }
@@ -186,9 +174,9 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
         data.setAnalysisStatus(MessageUtil.getMessage("report.test.status.inProgress"));
     }
 
-    // addReferredTests method in both PatientClinical and PatientCILNSPClinical are
-    // nearly identical and
-    // should be refactored to use the same code.
+    /**
+     * Método para agregar pruebas referidas.
+     */
     private List<ClinicalPatientData> addReferredTests(Referral referral, ClinicalPatientData parentData) {
         List<ReferralResult> referralResults = referralResultService.getReferralResultsForReferral(referral.getId());
         NoteService noteService = SpringContext.getBean(NoteService.class);
@@ -261,9 +249,11 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
         return currentSampleReportItems;
     }
 
+    /**
+     * Método para copiar datos del padre a los datos referidos.
+     */
     private void copyParentData(ClinicalPatientData data, ClinicalPatientData parentData) {
-        data.setContactInfo(parentData.getContactInfo());
-        data.setSiteInfo(parentData.getSiteInfo());
+        // Se eliminan los campos relacionados con subjectNumber y contactInfo
         data.setReceivedDate(parentData.getReceivedDate());
         data.setDob(parentData.getDob());
         data.setAge(parentData.getAge());
@@ -296,6 +286,9 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
         }
     }
 
+    /**
+     * Método para construir y ordenar el informe.
+     */
     private void buildReport() {
         Collections.sort(reportItems, new Comparator<ClinicalPatientData>() {
             @Override
@@ -328,39 +321,9 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
                     return sampleIdSort;
                 }
 
-                if (o1.getParentResult() != null && o2.getParentResult() != null) {
-                    int parentSort = Integer.parseInt(o1.getParentResult().getId())
-                            - Integer.parseInt(o2.getParentResult().getId());
-                    if (parentSort != 0) {
-                        return parentSort;
-                    }
-                }
                 return o1.getTestSortOrder() - o2.getTestSortOrder();
             }
         });
-
-        // ArrayList<ClinicalPatientData> augmentedList = new
-        // ArrayList<>(reportItems.size());
-        // HashSet<String> parentResults = new HashSet<>();
-        // for (ClinicalPatientData data : reportItems) {
-        // if (data.getParentResult() != null &&
-        // !parentResults.contains(data.getParentResult().getId())) {
-        // parentResults.add(data.getParentResult().getId());
-        // ClinicalPatientData marker = new ClinicalPatientData(data);
-        // ResultService resultResultService =
-        // SpringContext.getBean(ResultService.class);
-        // Result result = (data.getParentResult());
-        // marker.setTestName(resultResultService.getSimpleResultValue(result));
-        // marker.setResult(null);
-        // marker.setTestRefRange(null);
-        // marker.setParentMarker(true);
-        // augmentedList.add(marker);
-        // }
-        //
-        // augmentedList.add(data);
-        // }
-        //
-        // reportItems = augmentedList;
 
         String currentPanelId = null;
         for (ClinicalPatientData reportItem : reportItems) {
@@ -373,9 +336,11 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
             }
 
             int dividerIndex = reportItem.getAccessionNumber().lastIndexOf("-");
-            reportItem.setAccessionNumber(reportItem.getAccessionNumber().substring(0, dividerIndex));
+            if (dividerIndex > 0 && reportItem.getAccessionNumber().length() > dividerIndex) {
+                reportItem.setAccessionNumber(reportItem.getAccessionNumber().substring(0, dividerIndex));
+            }
             reportItem.setCompleteFlag(MessageUtil
-                    .getMessage(sampleCompleteMap.get(reportItem.getAccessionNumber()) ? "report.status.complete"
+                    .getMessage(sampleCompleteMap.get(reportItem.getAccessionNumber().split("_")[0]) ? "report.status.complete"
                             : "report.status.partial"));
             if (reportItem.isCorrectedResult()) {
                 if (reportItem.getNote() != null && reportItem.getNote().length() > 0) {
