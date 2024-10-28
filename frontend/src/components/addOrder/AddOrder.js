@@ -372,6 +372,7 @@ const AddOrder = (props) => {
           referringSiteName:"10 - HG Abobo Nord",
           providerFirstName: "LABNIN", // Valor fijo para el nombre del provider
           providerLastName: "LABNIN", // Valor fijo para el apellido del provider
+          providerId: "6",
         },
       });
     }
