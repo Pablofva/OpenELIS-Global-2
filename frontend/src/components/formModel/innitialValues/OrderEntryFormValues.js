@@ -222,7 +222,7 @@ export const ModifyOrderFormValues = {
     orderTypes: null,
     orderType: null,
     externalOrderNumber: null,
-    labNo: "",
+    labNo: "24-000-001",
     requestDate: "",
     receivedDateForDisplay: "",
     receivedTime: "",

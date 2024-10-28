@@ -9,12 +9,8 @@ const OrderEntryValidationSchema = Yup.object().shape({
       labNo: Yup.string().required("Sample Lab Number is required"),
       referringSiteName: Yup.string(),
       referringSiteId: Yup.string(),
-      providerLastName: Yup.string().required(
-        "Requester Last Name is required",
-      ),
-      providerFirstName: Yup.string().required(
-        "Requester First Name is required",
-      ),
+      providerLastName: Yup.string(),
+      providerFirstName: Yup.string(),
       providerEmail: Yup.string().email("Invalid Email"),
     })
     .test("referringSiteName", "Referring Site is required", function (value) {
