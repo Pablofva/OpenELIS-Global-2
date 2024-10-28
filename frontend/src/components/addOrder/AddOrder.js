@@ -368,7 +368,7 @@ const AddOrder = (props) => {
           receivedDateForDisplay: configurationProperties.currentDateAsText,
           nextVisitDate: configurationProperties.currentDateAsText,
           receivedTime: configurationProperties.currentTimeAsText,
-          labNo: "24-000-001"
+          labNo: "24000001"
         },
       });
     }
