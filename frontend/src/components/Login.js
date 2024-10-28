@@ -58,8 +58,6 @@ function Login(props) {
             <img
               src={`images/LogoClaro2.png`}
               alt="fullsize logo"
-              width="300"
-              height="56"
             />
           </picture>
         </div>
