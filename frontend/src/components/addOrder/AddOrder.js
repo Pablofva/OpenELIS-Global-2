@@ -370,6 +370,8 @@ const AddOrder = (props) => {
           receivedTime: configurationProperties.currentTimeAsText,
           labNo: "24000001",
           referringSiteName:"10 - HG Abobo Nord",
+          providerFirstName: "LABNIN", // Valor fijo para el nombre del provider
+          providerLastName: "LABNIN", // Valor fijo para el apellido del provider
         },
       });
     }
@@ -666,51 +668,29 @@ const AddOrder = (props) => {
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
 
-                  <Column lg={8} md={4} sm={4}>
-                    <TextInput
-                        name="requesterFirstName"
-                        placeholder={intl.formatMessage({
-                          id: "input.placeholder.requesterFirstName",
-                        })}
-                        labelText={
-                          <>
-                            <FormattedMessage id="order.requester.firstName.label" />
-                            <span className="requiredlabel">*</span>
-                          </>
-                        }
-                        disabled={
-                            configurationProperties.restrictFreeTextProviderEntry === "true"
-                        }
-                        onChange={handleRequesterFirstName}
-                        value={orderFormValues.sampleOrderItems.providerFirstName}
-                        invalid={error("sampleOrderItems.providerFirstName") ? true : false}
-                        invalidText={error("sampleOrderItems.providerFirstName")}
-                        id="requesterFirstName"
-                    />
-                  </Column>
+                <Column lg={8} md={4} sm={4}>
+                  <TextInput
+                      name="providerFirstName"
+                      labelText={intl.formatMessage({
+                        id: "order.requester.firstName.label",
+                      })}
+                      value={orderFormValues.sampleOrderItems.providerFirstName}
+                      readOnly // Campo de solo lectura
+                      id="providerFirstName"
+                  />
+                </Column>
 
-                  <Column lg={8} md={4} sm={4}>
-                    <TextInput
-                        name="requesterLastName"
-                        placeholder={intl.formatMessage({
-                          id: "input.placeholder.requesterLastName",
-                        })}
-                        labelText={
-                          <>
-                            <FormattedMessage id="order.requester.lastName.label" />
-                            <span className="requiredlabel">*</span>
-                          </>
-                        }
-                        disabled={
-                            configurationProperties.restrictFreeTextProviderEntry === "true"
-                        }
-                        value={orderFormValues.sampleOrderItems.providerLastName}
-                        onChange={handleRequesterLastName}
-                        id="requesterLastName"
-                        invalid={error("sampleOrderItems.providerLastName") ? true : false}
-                        invalidText={error("sampleOrderItems.providerLastName")}
-                    />
-                  </Column>
+                <Column lg={8} md={4} sm={4}>
+                  <TextInput
+                      name="providerLastName"
+                      labelText={intl.formatMessage({
+                        id: "order.requester.lastName.label",
+                      })}
+                      value={orderFormValues.sampleOrderItems.providerLastName}
+                      readOnly // Campo de solo lectura
+                      id="providerLastName"
+                  />
+                </Column>
 
                   <Column lg={8} sm={4}>
                     <TextInput
