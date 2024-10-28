@@ -48,38 +48,36 @@ public class SamplePatientEntryFormValidator implements Validator {
     }
 
     private void validateSampleItem(Element sampleItem, Errors errors) {
-        // validate test ids
+        // Validación de IDs de pruebas
         String[] testIDs = sampleItem.attributeValue("tests").split(",");
-        for (int j = 0; j < testIDs.length; ++j) {
-            ValidationHelper.validateIdField(testIDs[j], "sampleXML", "sampleXML tests", errors, false);
-            if (errors.hasErrors()) {
-                return;
-            }
-        } // validate panel ids
+        for (String testID : testIDs) {
+            ValidationHelper.validateIdField(testID, "sampleXML", "sampleXML tests", errors, false); // false para opcional
+            if (errors.hasErrors()) return;
+        }
+
+        // Validación de panel IDs
         String[] panelIDs = sampleItem.attributeValue("panels").split(",");
-        for (int j = 0; j < panelIDs.length; ++j) {
-            ValidationHelper.validateIdField(panelIDs[j], "sampleXML", "sampleXML panels", errors, false);
-            if (errors.hasErrors()) {
-                return;
-            }
+        for (String panelID : panelIDs) {
+            ValidationHelper.validateIdField(panelID, "sampleXML", "sampleXML panels", errors, false); // false para opcional
+            if (errors.hasErrors()) return;
         }
-        // validate date not required
+
+        // Validación de la fecha como opcional
         String collectionDate = sampleItem.attributeValue("date").trim();
-        ValidationHelper.validateDateField(collectionDate, "sampleXML", "sampleXML date", errors, DateRelation.PAST,
-                false);
-        if (errors.hasErrors()) {
-            return;
+        if (!GenericValidator.isBlankOrNull(collectionDate)) { // Solo validar si tiene valor
+            ValidationHelper.validateDateField(collectionDate, "sampleXML", "sampleXML date", errors, DateRelation.PAST, false);
         }
+        if (errors.hasErrors()) return;
 
-        // validate time
+        // Validación de la hora como opcional
         String collectionTime = sampleItem.attributeValue("time").trim();
-        ValidationHelper.validateTimeField(collectionTime, "sampleXML", "sampleXML time", errors, false);
-        if (errors.hasErrors()) {
-            return;
+        if (!GenericValidator.isBlankOrNull(collectionTime)) { // Solo validar si tiene valor
+            ValidationHelper.validateTimeField(collectionTime, "sampleXML", "sampleXML time", errors, false);
         }
+        if (errors.hasErrors()) return;
 
-        // validate sample id
+        // Validación del sampleID
         String sampleId = sampleItem.attributeValue("sampleID");
-        ValidationHelper.validateIdField(sampleId, "sampleXML", "sampleXML sampleID", errors, true);
+        ValidationHelper.validateIdField(sampleId, "sampleXML", "sampleXML sampleID", errors, false); // false para opcional
     }
 }
