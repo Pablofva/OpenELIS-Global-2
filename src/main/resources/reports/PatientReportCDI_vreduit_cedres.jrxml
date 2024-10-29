@@ -73,7 +73,6 @@
 	<field name="healthDistrict" class="java.lang.String"/>
 	<field name="sampleId" class="java.lang.String"/>
 	<field name="sampleType" class="java.lang.String"/>
-	<field name="analysisStatus" class="java.lang.String"/>
 	<field name="labOrderType" class="java.lang.String"/>
 	<field name="sampleSortOrder" class="java.lang.String"/>
 	<group name="person" footerPosition="ForceAtBottom" resetPageNumber="true" startNewPage="true">
@@ -342,9 +341,6 @@
 				<element kind="textField" uuid="aab74284-e727-44b4-90b7-c2b2765c962d" mode="Transparent" x="1" y="13" width="110" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$R{report.test}]]></expression>
 				</element>
-				<element kind="textField" uuid="26de6905-c8ca-4795-ac19-ba64e0001042" x="264" y="13" width="59" height="12" markup="none" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<expression><![CDATA[$R{report.status}]]></expression>
-				</element>
 				<element kind="textField" uuid="c3a9eabe-05a1-4128-bb90-d8e0c3fa2cea" mode="Transparent" x="357" y="13" width="117" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$R{report.referenceValue}]]></expression>
 				</element>
@@ -353,6 +349,12 @@
 				</element>
 				<element kind="textField" uuid="6f88d67c-19e8-4821-9590-8f5e8113057b" mode="Transparent" x="146" y="13" width="118" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$R{report.outcome}]]></expression>
+				</element>
+				<element kind="textField" uuid="e7c3ce56-073e-4b34-bc31-7a99d46ab6b7" mode="Transparent" x="323" y="13" width="34" height="12" backcolor="#FFFFFF" fontSize="7.0" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$R{report.alert}]]></expression>
+				</element>
+				<element kind="textField" uuid="d1811613-fc6a-4769-aea4-1986efab2d7f" mode="Transparent" x="111" y="13" width="35" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$R{report.specimen}]]></expression>
 				</element>
 				<element kind="textField" uuid="97467337-fb02-46d2-abdf-9a6783d2f7d1" mode="Transparent" x="1" y="0" width="551" height="14" backcolor="#FFFFFF" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$F{testSection}]]></expression>
@@ -496,10 +498,8 @@
 						<rightPen lineWidth="0.5"/>
 					</box>
 				</element>
-				<element kind="textField" uuid="f373f597-25a8-4cf2-999a-ee82d8cfacc6" stretchType="ElementGroupHeight" mode="Transparent" x="323" y="0" width="0" height="0" backcolor="#FFFFFF" printWhenGroupChanges="person" markup="html" fontName="SansSerif" fontSize="6.0" textAdjust="StretchHeight" blankWhenNull="true" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<element kind="textField" uuid="f373f597-25a8-4cf2-999a-ee82d8cfacc6" stretchType="ElementGroupHeight" mode="Transparent" x="323" y="0" width="34" height="12" backcolor="#FFFFFF" markup="html" fontName="SansSerif" fontSize="6.0" textAdjust="StretchHeight" blankWhenNull="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$F{alerts}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<box>
 						<leftPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
@@ -514,13 +514,8 @@
 						<rightPen lineWidth="0.5"/>
 					</box>
 				</element>
-				<element kind="textField" uuid="61b75ec8-379b-4d3c-935b-b42666ee7f0b" x="263" y="0" width="60" height="12" fontSize="6.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
-					<expression><![CDATA[$F{analysisStatus}]]></expression>
-				</element>
-				<element kind="textField" uuid="c39fd31f-d2fa-4536-866a-28fcb913028b" stretchType="ElementGroupHeight" x="111" y="0" width="0" height="0" printWhenGroupChanges="section name" markup="html" fontSize="6.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" removeLineWhenBlank="true" printRepeatedValues="false" hTextAlign="Center" vTextAlign="Middle">
+				<element kind="textField" uuid="c39fd31f-d2fa-4536-866a-28fcb913028b" stretchType="ElementGroupHeight" x="111" y="0" width="35" height="12" markup="html" fontSize="6.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Middle">
 					<expression><![CDATA[$F{sampleSortOrder}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<box topPadding="2" leftPadding="4" bottomPadding="2">
 						<pen lineStyle="Solid" lineColor="#000000"/>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
