@@ -1,47 +1,54 @@
 <!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
 <jasperReport name="PatientReport" language="java" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="552" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" resourceBundle="languages/message" whenResourceMissingType="Empty" uuid="eaabfa44-c2f3-49c7-b942-12d40b07ffd6">
-	<property name="ireport.scriptlethandling" value="0"/>
+<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<import>net.sf.jasperreports.engine.*</import>
-	<import>java.util.*</import>
-	<import>net.sf.jasperreports.engine.data.*</import>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
 		<defaultValueExpression><![CDATA["../reports/"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="siteId" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="siteName" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="directorName" class="java.lang.String"/>
-	<parameter name="headerName" forPrompting="false" class="java.lang.String">
+	<parameter name="headerName" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["GeneralHeader.jasper"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="usePageNumbers" forPrompting="false" class="java.lang.String">
+	<parameter name="usePageNumbers" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["true"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="useSTNumber" forPrompting="false" class="java.lang.Boolean">
+	<parameter name="additionalSiteInfo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="useSTNumber" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
 	</parameter>
-	<parameter name="correctedReport" forPrompting="false" class="java.lang.Boolean">
+	<parameter name="correctedReport" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
 	</parameter>
-	<parameter name="billingNumberLabel" forPrompting="false" class="java.lang.String"/>
-	<parameter name="footerName" forPrompting="false" class="java.lang.String">
+	<parameter name="billingNumberLabel" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="footerName" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["CILNSPFooter.jasper"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="leftHeaderImage" forPrompting="false" class="java.io.InputStream"/>
-	<parameter name="rightHeaderImage" forPrompting="false" class="java.io.InputStream"/>
-	<parameter name="labDirectorName" forPrompting="false" class="java.lang.String"/>
-	<parameter name="labDirectorTitle" forPrompting="false" class="java.lang.String"/>
-	<parameter name="useLabDirectorSignature" forPrompting="false" class="java.lang.Boolean"/>
-	<parameter name="labDirectorSignature" forPrompting="false" class="java.io.InputStream"/>
+	<parameter name="leftHeaderImage" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="rightHeaderImage" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="labDirectorName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="labDirectorTitle" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="useLabDirectorSignature" class="java.lang.Boolean" isForPrompting="false"/>
+	<parameter name="labDirectorSignature" class="java.io.InputStream" isForPrompting="false"/>
 	<parameter name="imagesPath" class="java.lang.String"/>
-	<parameter name="useBillingNumber" forPrompting="false" class="java.lang.Boolean">
+	<parameter name="useBillingNumber" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
 	</parameter>
-	<parameter name="useContactTracing" forPrompting="false" class="java.lang.Boolean">
+	<parameter name="useContactTracing" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
 	</parameter>
-	<query language="sql"><![CDATA[]]></query>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
 	<field name="nationalId" class="java.lang.String"/>
 	<field name="gender" class="java.lang.String"/>
 	<field name="stNumber" class="java.lang.String"/>
@@ -50,6 +57,8 @@
 	<field name="accessionNumber" class="java.lang.String"/>
 	<field name="recievedDate" class="java.lang.String"/>
 	<field name="conclusion" class="java.lang.String"/>
+	<field name="contactInfo" class="java.lang.String"/>
+	<field name="siteInfo" class="java.lang.String"/>
 	<field name="uom" class="java.lang.String"/>
 	<field name="note" class="java.lang.String"/>
 	<field name="age" class="java.lang.String"/>
@@ -62,12 +71,15 @@
 	<field name="separator" class="java.lang.Boolean"/>
 	<field name="orderFinishDate" class="java.lang.String"/>
 	<field name="orderDate" class="java.lang.String"/>
+	<field name="patientSiteNumber" class="java.lang.String"/>
 	<field name="patientName" class="java.lang.String"/>
 	<field name="abnormalResult" class="java.lang.Boolean"/>
 	<field name="collectionDateTime" class="java.lang.String"/>
 	<field name="correctedResult" class="java.lang.Boolean"/>
 	<field name="parentMarker" class="java.lang.Boolean"/>
 	<field name="alerts" class="java.lang.String"/>
+	<field name="subjectNumber" class="java.lang.String"/>
+	<field name="billingNumber" class="java.lang.String"/>
 	<field name="healthRegion" class="java.lang.String"/>
 	<field name="healthDistrict" class="java.lang.String"/>
 	<field name="sampleId" class="java.lang.String"/>
@@ -77,13 +89,15 @@
 	<field name="sampleSortOrder" class="java.lang.String"/>
 	<field name="contactTracingIndexName" class="java.lang.String"/>
 	<field name="contactTracingIndexRecordNumber" class="java.lang.String"/>
-	<group name="person" footerPosition="ForceAtBottom" startNewPage="true" resetPageNumber="true">
+	<group name="person" isStartNewPage="true" isResetPageNumber="true" footerPosition="ForceAtBottom">
+		<groupExpression><![CDATA[$F{subjectNumber}]]></groupExpression>
 		<groupFooter>
 			<band height="80">
-				<element kind="textField" uuid="3b1570b6-db46-4ba8-ab44-9c2fdb156055" x="371" y="0" width="182" height="70" fontSize="8.0" evaluationTime="Group" pattern="" evaluationGroup="person" removeLineWhenBlank="true" bold="false">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.signValidation}]]></expression>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField evaluationTime="Group" evaluationGroup="person" pattern="">
+					<reportElement x="371" y="0" width="182" height="70" isRemoveLineWhenBlank="true" uuid="c74941ec-a96b-491f-871f-bf6e816d9da2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
 					<box leftPadding="4">
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="0.5"/>
@@ -91,16 +105,26 @@
 						<bottomPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
 					</box>
-				</element>
-				<element kind="textField" uuid="2b2e8f21-7d56-4d33-bc0d-b4a375238d5c" x="375" y="56" width="100" height="14" fontSize="8.0" evaluationTime="Group" pattern="" evaluationGroup="person" removeLineWhenBlank="true" bold="false" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.date}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</element>
-				<element kind="textField" uuid="80d825e7-efc5-4a73-a87e-4cda76a8a625" x="1" y="0" width="370" height="70" fontSize="8.0" evaluationTime="Group" pattern="" evaluationGroup="person" removeLineWhenBlank="true" bold="false">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.labInfomation}]]></expression>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<textElement>
+						<font size="8" isBold="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.signValidation}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="person" pattern="">
+					<reportElement x="375" y="56" width="100" height="14" isRemoveLineWhenBlank="true" uuid="9f8b1f49-a2ad-4fc2-b03f-32b7701c7a72">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.date}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="person" pattern="">
+					<reportElement x="1" y="0" width="370" height="70" isRemoveLineWhenBlank="true" uuid="6f4b1552-91da-437b-8a83-8838a71a5305">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
 					<box topPadding="0" leftPadding="4">
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="0.5"/>
@@ -108,98 +132,69 @@
 						<bottomPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
 					</box>
-				</element>
-				<element kind="image" uuid="cdf02a88-0c64-4957-a6d7-e76207a59a60" x="373" y="10" width="178" height="25">
-					<printWhenExpression><![CDATA[$P{useLabDirectorSignature}]]></printWhenExpression>
-					<expression><![CDATA[$P{labDirectorSignature}]]></expression>
-				</element>
-				<element kind="textField" uuid="9b33e50b-b055-47e1-9e71-e72f9fe7f98c" x="375" y="35" width="100" height="10" fontSize="8.0">
-					<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
-					<expression><![CDATA[$P{labDirectorName}]]></expression>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</element>
-				<element kind="textField" uuid="a23222cc-687b-415c-a3ef-11e402768c9a" x="375" y="45" width="100" height="10" fontSize="8.0">
-					<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
-					<expression><![CDATA[$P{labDirectorTitle}]]></expression>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</element>
-				<element kind="textField" uuid="bac6045e-006a-431d-a063-6bbf076cfeef" positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="111" y="0" width="543" height="11" backcolor="#F5F5F5" markup="styled" fontSize="6.0" textAdjust="StretchHeight" blankWhenNull="true" removeLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{note} != null]]></printWhenExpression>
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{note}]]></expression>
-					<box topPadding="2" leftPadding="4" rightPadding="4">
-						<pen lineWidth="0.5" lineColor="#000000"/>
-						<topPen lineWidth="0.5" lineColor="#000000"/>
-						<leftPen lineWidth="0.5" lineColor="#000000"/>
-						<bottomPen lineWidth="0.5" lineColor="#000000"/>
-						<rightPen lineWidth="0.5" lineColor="#000000"/>
-					</box>
-				</element>
-				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<textElement>
+						<font size="8" isBold="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.labInfomation}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="373" y="10" width="178" height="25" uuid="de5502ee-ec19-47a4-9b19-53edda625240">
+						<printWhenExpression><![CDATA[$P{useLabDirectorSignature}]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA[$P{labDirectorSignature}]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="375" y="35" width="100" height="10" uuid="5e6431e2-60d0-4ae9-a0e2-69d207a995d0">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labDirectorName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="375" y="45" width="100" height="10" uuid="e85ea76f-30da-4f45-bb18-2263803b7233">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labDirectorTitle}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
-	<group name="Accession Number" reprintHeaderOnEachPage="true" startNewPage="true" resetPageNumber="true">
-		<expression><![CDATA[$F{accessionNumber}]]></expression>
+	<group name="Accession Number" isStartNewPage="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{accessionNumber}]]></groupExpression>
 		<groupHeader>
 			<band height="117" splitType="Prevent">
-				<element kind="textField" uuid="3bc21659-9d11-4551-ba99-3f62b09a10d3" mode="Opaque" x="0" y="65" width="553" height="29" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="SansSerif" fontSize="8.0" pdfFontName="Helvetica" pdfEncoding="Cp1252" pattern="" blankWhenNull="true" removeLineWhenBlank="true" pdfEmbedded="false" underline="false" bold="false" italic="false" strikeThrough="false" hTextAlign="Left" vTextAlign="Middle">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.specimenCollectTimes} + ": " + ($F{collectionDateTime} != null ? $F{collectionDateTime}: "" )]]></expression>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="65" width="553" height="29" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF" uuid="001773f0-c297-4b75-b3eb-bc39cca1cd95">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+					</reportElement>
 					<box leftPadding="4">
 						<topPen lineWidth="0.25" lineStyle="Solid"/>
 						<leftPen lineWidth="0.25" lineStyle="Solid"/>
 						<bottomPen lineWidth="0.25" lineStyle="Solid"/>
 						<rightPen lineWidth="0.5" lineStyle="Solid"/>
 					</box>
-				</element>
-				<element kind="frame" uuid="e4b40074-a621-4359-8152-a56217171ae8" mode="Opaque" x="0" y="65" width="553" height="29" forecolor="#66FF66" backcolor="#FFFFFF" removeLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
-					<element kind="textField" uuid="ef0e2622-b6e6-4da7-8ae9-a76afbe65936" x="256" y="0" width="105" height="14" backcolor="#FFFFFF" fontSize="8.0" blankWhenNull="true">
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{nationalId}]]></expression>
-						<box leftPadding="4">
-							<topPen lineWidth="0.5" lineStyle="Solid"/>
-							<leftPen lineWidth="0.0" lineStyle="Solid"/>
-							<rightPen lineWidth="0.0" lineStyle="Solid"/>
-						</box>
-					</element>
-					<element kind="textField" uuid="223713a8-2781-4f91-8f68-e55565ee83ad" mode="Opaque" x="186" y="0" width="70" height="14" backcolor="#E6E6E6" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.idNational}]]></expression>
-						<box leftPadding="4">
-							<topPen lineWidth="0.5" lineStyle="Solid"/>
-							<leftPen lineWidth="0.5" lineStyle="Solid"/>
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5" lineStyle="Solid"/>
-						</box>
-					</element>
-					<element kind="textField" uuid="d816c496-ee6f-4d30-ace9-f8774ac929bc" mode="Opaque" x="361" y="0" width="95" height="14" backcolor="#E6E6E6" fontSize="8.0">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.ordinanceNo}]]></expression>
-						<box leftPadding="4">
-							<topPen lineWidth="0.5" lineStyle="Solid"/>
-							<leftPen lineWidth="0.5" lineStyle="Solid"/>
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5" lineStyle="Solid"/>
-						</box>
-					</element>
-					<element kind="textField" uuid="4c321841-d828-488a-aa41-330f90a3aa31" x="456" y="0" width="97" height="14" backcolor="#C0C0C0" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{accessionNumber}]]></expression>
-						<box leftPadding="4">
-							<pen lineWidth="0.5"/>
-							<topPen lineWidth="0.5" lineStyle="Solid"/>
-							<leftPen lineWidth="0.5" lineStyle="Solid"/>
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5" lineStyle="Solid"/>
-						</box>
-					</element>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.specimenCollectTimes} + ": " + ($F{collectionDateTime} != null ? $F{collectionDateTime}: "" )]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Opaque" x="0" y="65" width="553" height="29" isRemoveLineWhenBlank="true" forecolor="#66FF66" backcolor="#FFFFFF" uuid="58c085cb-954b-46c9-ba32-f32cb961c205">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+					</reportElement>
 					<box>
 						<pen lineColor="#E6E6E6"/>
 						<topPen lineColor="#E6E6E6"/>
@@ -207,12 +202,185 @@
 						<bottomPen lineColor="#E6E6E6"/>
 						<rightPen lineColor="#E6E6E6"/>
 					</box>
-				</element>
-				<element kind="frame" uuid="c380966a-3e45-41df-b269-c800cfb7b88a" x="-1" y="0" width="554" height="65" forecolor="#FF6666" backcolor="#33FFFF" removeLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
-					<element kind="textField" uuid="27a80050-59a8-474d-9621-dfb1281b2ecc" mode="Opaque" x="271" y="32" width="50" height="11" backcolor="#E6E6E6" fontSize="8.0" pattern="" blankWhenNull="true" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.age}]]></expression>
+					<textField isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="100" y="14" width="0" height="0" backcolor="#FFFFFF" uuid="2488fea0-90d2-4c9b-82b8-8b276c4b99f3">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<pen lineWidth="0.25"/>
+							<topPen lineWidth="0.25" lineStyle="Solid"/>
+							<leftPen lineWidth="0.25" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+							<rightPen lineWidth="0.25" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{contactInfo}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="14" width="0" height="0" backcolor="#E6E6E6" uuid="6be1fd10-e4c8-4f8e-bf55-c41a69024a4f">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.prescriber}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToBandHeight" x="361" y="14" width="0" height="0" backcolor="#FFFFFF" uuid="325f4e97-ce33-4966-918f-6b1d006b062b">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{siteInfo}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="256" y="14" width="0" height="0" backcolor="#E6E6E6" uuid="bef9d9f0-29b9-49b0-ad93-df043b5a7c24">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.referringSite}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="0" y="0" width="0" height="0" backcolor="#E6E6E6" uuid="e52f19e4-0ffc-4f3a-9701-925d13a8a473">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.patientCode}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="101" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="009725ca-3c45-4276-b0e0-071450b9e832">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{subjectNumber}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="256" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="24b58bef-2441-4f8d-977a-627e94f8096a">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{nationalId}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="186" y="0" width="0" height="0" backcolor="#E6E6E6" uuid="32fa39f9-3b30-4b6a-be11-1dd285d4accb">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.idNational}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="361" y="0" width="0" height="0" backcolor="#E6E6E6" uuid="82783984-64eb-44d6-b869-cca484d3be9a">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.ordinanceNo}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="456" y="0" width="97" height="0" backcolor="#C0C0C0" uuid="210e03c0-65c3-488c-9b76-541775ac8158">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{accessionNumber}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="-1" y="0" width="554" height="65" isRemoveLineWhenBlank="true" forecolor="#FF6666" backcolor="#33FFFF" uuid="e884e8bb-c26c-4d66-8db5-31659ad919c2">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+					</reportElement>
+					<textField pattern="" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="204" y="0" width="50" height="21" backcolor="#E6E6E6" uuid="c6831e1f-6df9-441a-824c-08cf9a35d42c">
+							<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						</reportElement>
 						<box leftPadding="3">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -220,10 +388,16 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="7267c276-dcba-4b45-9d70-6d9251614b38" x="321" y="32" width="34" height="11" fontSize="8.0" pattern="" blankWhenNull="true" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{age}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.age}]]></textFieldExpression>
+					</textField>
+					<textField pattern="" isBlankWhenNull="true">
+						<reportElement x="254" y="0" width="34" height="21" uuid="5032da4c-ff24-4b66-a3b3-c3fe60431aca">
+							<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						</reportElement>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -231,11 +405,17 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="16d546f4-4ca3-49b2-b943-023a61c0c683" x="524" y="32" width="30" height="11" fontSize="8.0" pattern="" blankWhenNull="true" vTextAlign="Middle">
-						<printWhenExpression><![CDATA[!"0".equals($F{gender})]]></printWhenExpression>
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{gender}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+					</textField>
+					<textField pattern="" isBlankWhenNull="true">
+						<reportElement x="328" y="0" width="30" height="21" uuid="67f51491-a902-47a6-874a-d82e497b8169">
+							<property name="com.jaspersoft.studio.unit.x" value="px"/>
+							<printWhenExpression><![CDATA[!"0".equals($F{gender})]]></printWhenExpression>
+						</reportElement>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -243,10 +423,16 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="c9da6244-ee61-4d3d-9c5c-cded4db4da81" mode="Opaque" x="491" y="32" width="33" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.sex}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="288" y="0" width="39" height="21" backcolor="#E6E6E6" uuid="cf4002f7-79f4-47f2-b581-80bd23dbda56">
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
 						<box leftPadding="3">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -254,47 +440,206 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="3ab37ffa-65dc-4621-a9a3-e75e91136dd7" mode="Opaque" x="1" y="43" width="100" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.ordinanceNo}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.sex}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="0" width="0" height="0" backcolor="#E6E6E6" uuid="f485dc89-c793-42b4-94ab-f6f14aabe1cd">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font fontName="SansSerif" size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.patientCode}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="101" y="0" width="0" height="0" uuid="0eb7c852-c91d-4587-9aa6-7cb27cbd3070">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{subjectNumber}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="199" y="0" width="0" height="0" backcolor="#E6E6E6" uuid="9722f373-9fd6-4d14-bef2-bb130d729750">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.TRUE )]]></printWhenExpression>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.idNational}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="199" y="10" width="0" height="0" backcolor="#E6E6E6" uuid="bf7b65f3-d2ad-42c2-8c98-cb872e0b81bf">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.TRUE )]]></printWhenExpression>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="1.0" lineColor="#CCCCCC"/>
+							<leftPen lineWidth="0.5" lineStyle="Solid"/>
+							<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							<rightPen lineWidth="0.5" lineStyle="Solid"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{billingNumberLabel}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="286" y="0" width="0" height="0" uuid="e4af43c5-1f73-4d49-86d4-e9591a6f76b8">
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.TRUE )]]></printWhenExpression>
+						</reportElement>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineStyle="Solid"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{nationalId}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="1" y="32" width="100" height="11" backcolor="#E6E6E6" uuid="d1568897-dd4b-4e03-b45a-958e4f79ec99"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineColor="#CCCCCC"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.prescriber}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToBandHeight" x="100" y="32" width="171" height="11" uuid="21cd0cf6-7c6c-412f-8df7-ea30063dbf49"/>
+						<box leftPadding="4">
+							<bottomPen lineWidth="0.5"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{contactInfo}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="271" y="21" width="100" height="11" backcolor="#E6E6E6" uuid="9555d22a-9af2-47a5-9ae6-7b1693f045d6"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineColor="#000000"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.5" lineColor="#000000"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.referringSite}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToBandHeight" x="371" y="21" width="183" height="11" isPrintWhenDetailOverflows="true" uuid="a61ea8ee-7bfb-4ffb-bcc6-ff5ba5bfcf79"/>
+						<box leftPadding="4">
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{siteInfo}.split("\\|", 2)[0]]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="43" width="100" height="11" backcolor="#E6E6E6" uuid="97a686d6-42ca-45f0-a612-028386b140a7"/>
 						<box leftPadding="4">
 							<topPen lineWidth="1.0" lineColor="#000000"/>
 							<leftPen lineWidth="0.5"/>
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="cae963c4-1822-4127-bae6-1ff1f1d5e934" x="100" y="43" width="171" height="11" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{accessionNumber}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.ordinanceNo}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="100" y="43" width="171" height="11" uuid="62db8e0f-c696-4d54-abab-6ef1c83f8fda"/>
 						<box leftPadding="4">
 							<topPen lineWidth="1.0"/>
 							<bottomPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="3c30b7b9-0977-492b-ac32-a412b58e3d75" mode="Opaque" x="271" y="43" width="100" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.program}]]></expression>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{accessionNumber}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="271" y="43" width="100" height="11" backcolor="#E6E6E6" uuid="a660e2bb-bb88-40ae-ba83-a1eaa8866f1f"/>
 						<box leftPadding="4">
 							<topPen lineWidth="1.0" lineColor="#000000"/>
 							<leftPen lineWidth="0.5"/>
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="4be17764-eb22-4d7c-a5f7-51437d375128" x="371" y="43" width="183" height="11" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{labOrderType}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.program}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="371" y="43" width="183" height="11" uuid="c0217602-fc23-42b1-b17c-0a4d66295cd6"/>
 						<box leftPadding="4">
 							<topPen lineWidth="1.0"/>
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="38e88c3d-2088-41c1-aec4-a7091ec59886" mode="Opaque" x="1" y="54" width="163" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.orderDate}]]></expression>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{labOrderType}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="54" width="163" height="11" backcolor="#E6E6E6" uuid="414b0b7b-931c-44bc-8500-546c95e0c717"/>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -302,10 +647,14 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="6ca5c277-097c-4f39-b323-4974c4b6245f" mode="Opaque" x="271" y="54" width="162" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{report.receiptDate}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.orderDate}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="271" y="54" width="162" height="11" backcolor="#E6E6E6" uuid="25a071f5-ee0b-45cb-af85-08744d634a54"/>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -313,45 +662,38 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="1f9ab58e-8fbe-4fd1-bfe6-807db0e2d929" x="164" y="54" width="107" height="11" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{orderDate}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.receiptDate}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="164" y="54" width="107" height="11" uuid="13b481cc-5bd6-4488-b92c-c1d6c134f370"/>
 						<box leftPadding="4">
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="2ee93037-8271-4bcc-8141-7e032e158dc8" x="434" y="54" width="120" height="11" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{recievedDate}]]></expression>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="434" y="54" width="120" height="11" uuid="414ea272-f72a-4bde-9870-8756ef532f34"/>
 						<box leftPadding="4">
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="ad812c21-20e5-4ea1-bdef-f999f5668405" mode="Opaque" x="1" y="21" width="100" height="11" backcolor="#E6E6E6" markup="none" fontSize="8.0" bold="false" italic="false">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$R{label.patient_name}]]></expression>
-						<box leftPadding="4">
-							<pen lineWidth="0.5"/>
-							<topPen lineWidth="0.5"/>
-							<leftPen lineWidth="0.5"/>
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5"/>
-						</box>
-					</element>
-					<element kind="textField" uuid="673ba530-9e36-411e-87a2-cc1fd150bef2" x="101" y="21" width="170" height="11" fontSize="8.0" blankWhenNull="true">
-						<paragraph lineSpacing="Single"/>
-						<expression><![CDATA[$F{patientName}]]></expression>
-						<box leftPadding="4">
-							<bottomPen lineWidth="0.5"/>
-							<rightPen lineWidth="0.5"/>
-						</box>
-					</element>
-					<element kind="textField" uuid="87c4b9c6-b8c0-41b2-b0d5-ca8225c57724" mode="Opaque" x="271" y="21" width="88" height="11" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-						<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.FALSE )]]></printWhenExpression>
-						<expression><![CDATA[$R{report.idNational}]]></expression>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{recievedDate}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="21" width="100" height="11" backcolor="#E6E6E6" uuid="4d2bc47a-7b81-4f5f-aa71-a595c3e21317"/>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -359,10 +701,29 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-					<element kind="textField" uuid="24aba156-de68-4e9b-837c-0bc9a7ca6825" mode="Opaque" x="359" y="21" width="195" height="11" fontSize="8.0" vTextAlign="Middle">
-						<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.FALSE )]]></printWhenExpression>
-						<expression><![CDATA[$F{nationalId}]]></expression>
+						<textElement markup="none">
+							<font size="8" isBold="false" isItalic="false"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{label.patient_name}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="101" y="21" width="170" height="11" uuid="a58db653-541d-4499-90d5-c526412a9d1a"/>
+						<box leftPadding="4">
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{patientName}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="0" width="88" height="21" backcolor="#E6E6E6" uuid="1a863fb2-15fc-47bd-a500-8e1219de01fc">
+							<property name="com.jaspersoft.studio.unit.x" value="px"/>
+							<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 							<topPen lineWidth="0.5"/>
@@ -370,72 +731,157 @@
 							<bottomPen lineWidth="0.5"/>
 							<rightPen lineWidth="0.5"/>
 						</box>
-					</element>
-				</element>
-				<element kind="textField" uuid="3aa6fe24-0402-4191-9401-f5eaf0fa4356" stretchType="ContainerHeight" mode="Opaque" x="0" y="94" width="553" height="23" backcolor="#E6E6E6" fontSize="8.0" vTextAlign="Middle">
-					<printWhenExpression><![CDATA[$P{useContactTracing}.equals( Boolean.TRUE )]]></printWhenExpression>
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{label.note} + ": " + $R{field.contacttracing.indexname.label} + ": " + $F{contactTracingIndexName}  + " " + $R{field.contacttracing.indexrecordnumber.label} + ": " + $F{contactTracingIndexRecordNumber}]]></expression>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.idNational}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Opaque" x="89" y="0" width="115" height="21" uuid="a3562e85-1349-4f12-aee7-5a38daad6442">
+							<printWhenExpression><![CDATA[$P{useBillingNumber}.equals( Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+						<box leftPadding="4">
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.5"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{nationalId}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="271" y="32" width="100" height="11" backcolor="#E6E6E6" uuid="10d63a99-db60-462d-84bb-a8dc08a0a701"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.5" lineColor="#000000"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$R{report.referringSiteDepartment}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToBandHeight" x="371" y="32" width="183" height="11" isPrintWhenDetailOverflows="true" uuid="f299c322-fe6c-45c8-a4a2-84826ba43bc6"/>
+						<box leftPadding="4">
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{siteInfo}.split("\\|", 2)[1]]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField>
+					<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="67" width="553" height="23" backcolor="#E6E6E6" uuid="7d31b2f8-743d-40fa-84e9-600e47e649d9">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<printWhenExpression><![CDATA[$P{useContactTracing}.equals( Boolean.TRUE )]]></printWhenExpression>
+					</reportElement>
 					<box leftPadding="4">
 						<topPen lineWidth="0.5" lineStyle="Solid"/>
 						<leftPen lineWidth="0.5" lineStyle="Solid"/>
 						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 						<rightPen lineWidth="0.5" lineStyle="Solid"/>
 					</box>
-				</element>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{label.note} + ": " + $R{field.contacttracing.indexname.label} + ": " + $F{contactTracingIndexName}  + " " + $R{field.contacttracing.indexrecordnumber.label} + ": " + $F{contactTracingIndexRecordNumber}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
 			<band splitType="Stretch"/>
 		</groupFooter>
 	</group>
-	<group name="section name" reprintHeaderOnEachPage="true">
-		<expression><![CDATA[$F{testSection}]]></expression>
+	<group name="section name" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{testSection}]]></groupExpression>
 		<groupHeader>
 			<band height="25" splitType="Prevent">
-				<element kind="textField" uuid="7e5105ef-e3de-44de-8086-7cf1a5af6a98" mode="Transparent" x="1" y="13" width="110" height="12" backcolor="#FFFFFF" fontSize="7.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.test}]]></expression>
-				</element>
-				<element kind="textField" uuid="92f0aba7-21dd-4b8e-a417-e03f06447dc2" x="293" y="13" width="50" height="12" markup="none" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.status}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="ab0a0079-7402-456d-90be-200a5d3ae97e" mode="Transparent" x="373" y="13" width="110" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.referenceValue}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="15d0b1ad-a07b-4f21-9a65-f6a8245df4f6" mode="Transparent" x="483" y="13" width="70" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.unit}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="f8a4b4f2-6a60-4360-b805-62570775dc84" mode="Transparent" x="183" y="13" width="110" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.outcome}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="841dddd4-4408-4d38-a150-afb5a6cef9f6" mode="Transparent" x="343" y="13" width="30" height="12" backcolor="#FFFFFF" fontSize="7.0" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.alert}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="4571119e-ad2b-4060-a3bd-18886424a365" mode="Transparent" x="153" y="13" width="30" height="12" backcolor="#FFFFFF" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$R{report.specimen}]]></expression>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="0e0cf165-4c9b-4e7c-90ea-814bf9c1ab30" mode="Transparent" x="1" y="0" width="551" height="14" backcolor="#FFFFFF" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{testSection}]]></expression>
+				<textField textAdjust="StretchHeight">
+					<reportElement mode="Transparent" x="1" y="13" width="110" height="12" backcolor="#FFFFFF" uuid="aa4cf03e-7ae2-41fb-b214-1a4dae614691"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.test}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="293" y="13" width="50" height="12" uuid="226707e5-b606-47fe-b1eb-f79a3a091ab3">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.status}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="373" y="13" width="110" height="12" backcolor="#FFFFFF" uuid="671dbde7-f1e2-4213-8fb1-f3f136d647da">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.referenceValue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="483" y="13" width="70" height="12" backcolor="#FFFFFF" uuid="a5899c38-fc7a-488a-a2af-0e83cf360f79">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.unit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="183" y="13" width="110" height="12" backcolor="#FFFFFF" uuid="8bc67d14-145f-42ef-8f8a-dae54310ccab">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.outcome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="343" y="13" width="30" height="12" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="1a45a55d-3b83-4630-b01c-35a3be3bff6b">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.alert}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="153" y="13" width="30" height="12" backcolor="#FFFFFF" uuid="f4105c67-94e1-48b2-a0b0-6f8f04aebe54">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.specimen}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="1" y="0" width="551" height="14" backcolor="#FFFFFF" uuid="fc217f6f-42d0-4565-bbd1-991275206cb7"/>
 					<box>
 						<pen lineWidth="0.0"/>
 						<topPen lineWidth="0.0"/>
@@ -443,8 +889,14 @@
 						<bottomPen lineWidth="0.0"/>
 						<rightPen lineWidth="0.0"/>
 					</box>
-				</element>
-				<element kind="frame" uuid="40c664f6-346a-4583-bb89-14cbb62ae383" mode="Transparent" x="0" y="0" width="553" height="25" backcolor="#FFFFFF">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{testSection}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="553" height="25" backcolor="#FFFFFF" uuid="bc1d0045-d83e-4435-aa29-b04e501e94bc"/>
 					<box>
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="0.5"/>
@@ -452,160 +904,126 @@
 						<bottomPen lineWidth="0.5"/>
 						<rightPen lineWidth="0.5"/>
 					</box>
-				</element>
+				</frame>
 			</band>
 		</groupHeader>
 		<groupFooter>
 			<band/>
 		</groupFooter>
 	</group>
-	<background splitType="Stretch"/>
-	<title height="2" splitType="Stretch">
-		<element kind="line" uuid="ca891990-a2cf-400f-9ef9-ef9aebb99b40" key="line" x="0" y="-45" width="534" height="1" forecolor="#000000">
-			<pen lineWidth="2.0" lineStyle="Solid"/>
-		</element>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="2" splitType="Stretch">
+			<line>
+				<reportElement key="line" x="0" y="-45" width="534" height="1" forecolor="#000000" uuid="31264c2c-6742-4ada-a07d-c153fc910d13"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
 	</title>
-	<pageHeader height="124" splitType="Stretch">
-		<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
-		<element kind="subreport" uuid="3e751dd1-89f9-411a-bf13-056ab037203d" x="0" y="0" width="552" height="94" printWhenGroupChanges="person">
-			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
-			<expression><![CDATA[$P{SUBREPORT_DIR} + $P{headerName}]]></expression>
-			<parameter name="useSTNumber">
-				<expression><![CDATA[$P{useSTNumber}]]></expression>
-			</parameter>
-			<parameter name="billingNumberLabel">
-				<expression><![CDATA[$P{billingNumberLabel}]]></expression>
-			</parameter>
-			<parameter name="reportTitle">
-				<expression><![CDATA[$R{report.analysisReport}]]></expression>
-			</parameter>
-			<parameter name="rightHeaderImage">
-				<expression><![CDATA[$P{rightHeaderImage}]]></expression>
-			</parameter>
-			<parameter name="footerName">
-				<expression><![CDATA[$P{footerName}]]></expression>
-			</parameter>
-			<parameter name="imagesPath">
-				<expression><![CDATA[$P{imagesPath}]]></expression>
-			</parameter>
-			<parameter name="completeFlag">
-				<expression><![CDATA[$F{completeFlag}]]></expression>
-			</parameter>
-			<parameter name="headerName">
-				<expression><![CDATA[$P{headerName}]]></expression>
-			</parameter>
-			<parameter name="correctedReport">
-				<expression><![CDATA[$P{correctedReport}]]></expression>
-			</parameter>
-			<parameter name="leftHeaderImage">
-				<expression><![CDATA[$P{leftHeaderImage}]]></expression>
-			</parameter>
-			<parameter name="SUBREPORT_DIR">
-				<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
-			</parameter>
-			<parameter name="orderFinishDate">
-				<expression><![CDATA[$F{orderFinishDate}]]></expression>
-			</parameter>
-			<parameter name="usePageNumbers">
-				<expression><![CDATA[$P{usePageNumbers}]]></expression>
-			</parameter>
-			<parameter name="directorName">
-				<expression><![CDATA[$P{directorName}]]></expression>
-			</parameter>
-		</element>
-		<element kind="textField" uuid="67635847-764b-4ee3-afab-2288f087fc95" mode="Transparent" x="0" y="93" width="552" height="16" fontSize="12.0" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Bottom">
-			<printWhenExpression><![CDATA[$F{correctedResult}]]></printWhenExpression>
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[$R{report.correctedReport}]]></expression>
-		</element>
-		<element kind="textField" uuid="fc7c1afe-113e-475b-8f7b-6765e61e2ed8" mode="Opaque" x="1" y="110" width="550" height="13" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[$R{report.results} + " " + $F{completeFlag}]]></expression>
-		</element>
+	<pageHeader>
+		<band height="124" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="552" height="94" printWhenGroupChanges="person" uuid="d639fffa-c121-49ee-bdd6-ca2f8f6362b1"/>
+				<subreportParameter name="labName2">
+					<subreportParameterExpression><![CDATA[$P{additionalSiteInfo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="useSTNumber">
+					<subreportParameterExpression><![CDATA[$P{useSTNumber}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labName1">
+					<subreportParameterExpression><![CDATA[$P{siteName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="billingNumberLabel">
+					<subreportParameterExpression><![CDATA[$P{billingNumberLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportTitle">
+					<subreportParameterExpression><![CDATA[$R{report.analysisReport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rightHeaderImage">
+					<subreportParameterExpression><![CDATA[$P{rightHeaderImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="footerName">
+					<subreportParameterExpression><![CDATA[$P{footerName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagesPath">
+					<subreportParameterExpression><![CDATA[$P{imagesPath}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="completeFlag">
+					<subreportParameterExpression><![CDATA[$F{completeFlag}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="headerName">
+					<subreportParameterExpression><![CDATA[$P{headerName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="correctedReport">
+					<subreportParameterExpression><![CDATA[$P{correctedReport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="leftHeaderImage">
+					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="orderFinishDate">
+					<subreportParameterExpression><![CDATA[$F{orderFinishDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="siteId">
+					<subreportParameterExpression><![CDATA[$P{siteId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="usePageNumbers">
+					<subreportParameterExpression><![CDATA[$P{usePageNumbers}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="additionalSiteInfo">
+					<subreportParameterExpression><![CDATA[$P{additionalSiteInfo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="directorName">
+					<subreportParameterExpression><![CDATA[$P{directorName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="siteName">
+					<subreportParameterExpression><![CDATA[$P{siteName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + $P{headerName}]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="93" width="552" height="16" isRemoveLineWhenBlank="true" uuid="5844e68b-2a8f-4a8c-b325-a4fa2e389489">
+					<printWhenExpression><![CDATA[$F{correctedResult}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.correctedReport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="110" width="550" height="13" uuid="113ade29-80a4-4d87-a5af-559c4d4fa78a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.results} + " " + $F{completeFlag}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
-	<columnHeader splitType="Prevent"/>
+	<columnHeader>
+		<band splitType="Prevent"/>
+	</columnHeader>
 	<detail>
 		<band height="23" splitType="Prevent">
-			<element kind="rectangle" uuid="f102e809-16bc-4b58-9638-99e4df4ecd58" positionType="Float" mode="Opaque" x="0" y="12" width="10" height="11" forecolor="#E6E6E6" backcolor="#CCCCCC" printWhenDetailOverflows="true" removeLineWhenBlank="true">
-				<printWhenExpression><![CDATA[$F{note} != null]]></printWhenExpression>
-				<pen lineWidth="0.5"/>
-			</element>
-			<element kind="frame" uuid="57fad51d-2443-4895-8d0e-819141ff18af" x="0" y="0" width="553" height="12" forecolor="#000000">
-				<element kind="rectangle" uuid="42389462-3436-46dd-948d-2741b61ca1bb" stretchType="ContainerHeight" x="1" y="0" width="551" height="11" backcolor="#E0E0E0">
-					<printWhenExpression><![CDATA[$F{parentMarker}]]></printWhenExpression>
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="textField" uuid="ee069061-bede-407e-9463-90fb63caa8cb" stretchType="ElementGroupHeight" x="183" y="0" width="110" height="12" markup="styled" fontName="SansSerif" fontSize="6.0" pdfFontName="Helvetica" textAdjust="StretchHeight" blankWhenNull="true" pdfEmbedded="true" underline="false" bold="false" italic="false" hTextAlign="Right" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{result}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box topPadding="2" bottomPadding="2" rightPadding="4">
-						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-				</element>
-				<element kind="textField" uuid="1094048d-ac29-4e38-beb3-466246a14b8d" stretchType="ElementGroupHeight" x="0" y="0" width="153" height="12" markup="html" fontSize="6.0" textAdjust="StretchHeight" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{testName}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box topPadding="2" leftPadding="4" bottomPadding="2">
-						<pen lineStyle="Solid" lineColor="#000000"/>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-				</element>
-				<element kind="textField" uuid="2ce44916-053e-42b0-92bc-cd84222ec167" stretchType="ElementGroupHeight" x="373" y="0" width="110" height="12" fontSize="6.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{testRefRange}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box topPadding="2" bottomPadding="2">
-						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-				</element>
-				<element kind="textField" uuid="facf8aa9-33c0-4e5a-87f4-7c287c3db37b" stretchType="ElementGroupHeight" mode="Transparent" x="343" y="0" width="30" height="12" backcolor="#FFFFFF" markup="html" fontName="SansSerif" fontSize="6.0" blankWhenNull="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{alerts}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box>
-						<leftPen lineWidth="0.5"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-				</element>
-				<element kind="textField" uuid="3c588a0a-1638-49fe-af6d-d4958c4f1a8d" stretchType="ElementGroupHeight" x="483" y="0" width="70" height="12" fontSize="6.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{uom}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box topPadding="2" bottomPadding="2">
-						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<leftPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
-						<rightPen lineWidth="0.5"/>
-					</box>
-				</element>
-				<element kind="textField" uuid="f88ce33f-e872-4de2-b26b-564f2f68aa53" x="293" y="0" width="50" height="12" fontSize="6.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{analysisStatus}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</element>
-				<element kind="textField" uuid="10c42150-1973-4f85-bbad-259f07bd3619" stretchType="ElementGroupHeight" x="153" y="0" width="30" height="12" markup="html" fontSize="6.0" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Middle">
-					<paragraph lineSpacing="Single"/>
-					<expression><![CDATA[$F{sampleSortOrder}]]></expression>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<box topPadding="2" leftPadding="4" bottomPadding="2">
-						<pen lineStyle="Solid" lineColor="#000000"/>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-				</element>
+			<rectangle>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="12" width="10" height="11" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#E6E6E6" backcolor="#CCCCCC" uuid="0b6cd14b-1d8c-49f7-b522-6913bc4d6dce">
+					<printWhenExpression><![CDATA[$F{note} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<frame>
+				<reportElement x="0" y="0" width="553" height="12" forecolor="#000000" uuid="0e0cb695-3297-4a8f-8303-4af0377be594"/>
 				<box>
 					<pen lineWidth="0.25" lineColor="#CCCCCC"/>
 					<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -613,39 +1031,204 @@
 					<bottomPen lineWidth="0.5" lineColor="#000000"/>
 					<rightPen lineWidth="0.25" lineColor="#000000"/>
 				</box>
-			</element>
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="551" height="11" backcolor="#E0E0E0" uuid="e44edb89-6b9a-48a3-b444-73f221a2cca5">
+						<printWhenExpression><![CDATA[$F{parentMarker}]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="183" y="0" width="110" height="12" uuid="e3fe0c29-61a1-4983-8410-418cd6ed807e">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="2" rightPadding="4">
+						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+						<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{result}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="153" height="12" uuid="d1d30f5f-df2d-499e-9a75-ea379046296d">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="4" bottomPadding="2">
+						<pen lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{testName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="373" y="0" width="110" height="12" uuid="85835f1e-68e0-4fe6-bcb6-9cff9fab919c">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="2">
+						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{testRefRange}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="343" y="0" width="30" height="12" backcolor="#FFFFFF" uuid="46494733-27c6-4c59-9e8e-71c7e0423ce2">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="SansSerif" size="6" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{alerts}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="483" y="0" width="70" height="12" uuid="8a8f0526-0117-447f-862d-47a0a6619a5f">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="2">
+						<topPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.0" lineColor="#CCCCCC"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="293" y="0" width="0" height="0" uuid="7f1eb87c-e8f8-4e5c-b96f-212a28021e9a">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{analysisStatus}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="153" y="0" width="0" height="0" isPrintWhenDetailOverflows="true" uuid="693eb145-6908-42d5-b808-1efc1361d2de">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="4" bottomPadding="2">
+						<pen lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="6"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sampleSortOrder}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="10" y="12" width="543" height="11" isRemoveLineWhenBlank="true" backcolor="#F5F5F5" uuid="6bd0ae5d-5c30-4917-ac7c-fa6462e9519b">
+					<printWhenExpression><![CDATA[$F{note} != null]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement markup="styled">
+					<font size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{note}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter height="16" splitType="Stretch">
-		<element kind="textField" uuid="b1a9f372-6a46-4838-b9c5-ab0238a1e455" x="28" y="2" width="524" height="14" fontSize="7.0" vTextAlign="Middle">
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA["B = " + $R{report.belowNormal} + "  E = " + $R{report.aboveNormal} + "  * = " + $R{report.abnormal}  +  "  R = " + $R{report.extLabReference} + "  C = " + $R{report.confirmTest}]]></expression>
-		</element>
-		<element kind="textField" uuid="88361f44-bde9-44f9-9329-2276213002cb" x="0" y="2" width="28" height="14" fontSize="6.0" vTextAlign="Middle">
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[$R{report.legend}]]></expression>
-		</element>
+	<columnFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="28" y="2" width="524" height="14" uuid="61bd5e70-2e11-41bb-a2ad-71e0bd57f940"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["B = " + $R{report.belowNormal} + "  E = " + $R{report.aboveNormal} + "  * = " + $R{report.abnormal}  +  "  R = " + $R{report.extLabReference} + "  C = " + $R{report.confirmTest}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="28" height="14" uuid="79f5373e-f5b3-4197-9206-8ddeb1970744"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.legend}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
-	<pageFooter height="14" splitType="Stretch">
-		<element kind="textField" uuid="86970a75-fd36-4e4b-8d23-26f01bdf6703" x="371" y="4" width="126" height="10" fontSize="7.0" hTextAlign="Right" vTextAlign="Middle">
-			<printWhenExpression><![CDATA[$P{usePageNumbers}.equals("true")]]></printWhenExpression>
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[$R{report.label.page}+" "+$V{PAGE_NUMBER}+" "+$R{report.about}]]></expression>
-		</element>
-		<element kind="textField" uuid="5ebd50ec-4862-4392-a59e-7704859e3ef8" x="497" y="4" width="37" height="10" fontSize="7.0" evaluationTime="Group" evaluationGroup="Accession Number" vTextAlign="Middle">
-			<printWhenExpression><![CDATA[$P{usePageNumbers}.equals("true")]]></printWhenExpression>
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
-		</element>
-		<element kind="textField" uuid="f1b605c0-4a16-455d-904d-a9847bee9a74" x="102" y="4" width="148" height="10" fontSize="7.0" pattern="dd/MM/yyyy HH.mm.ss" bold="true" vTextAlign="Middle">
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[new java.util.Date()]]></expression>
-		</element>
-		<element kind="textField" uuid="23e8885d-cd76-45ba-b631-4c0e98d868eb" x="2" y="4" width="100" height="10" fontSize="7.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
-			<paragraph lineSpacing="Single"/>
-			<expression><![CDATA[$R{report.reportDate}]]></expression>
-			<box rightPadding="4"/>
-		</element>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="371" y="4" width="126" height="10" uuid="65bba3b4-9531-4802-b175-5772e7759a34">
+					<printWhenExpression><![CDATA[$P{usePageNumbers}.equals("true")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.label.page}+" "+$V{PAGE_NUMBER}+" "+$R{report.about}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="Accession Number">
+				<reportElement x="497" y="4" width="37" height="10" uuid="05a8cedd-e989-43f4-8ffe-953863e6ed61">
+					<printWhenExpression><![CDATA[$P{usePageNumbers}.equals("true")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="102" y="4" width="148" height="10" uuid="661744f2-5c6a-466e-a35b-e95d82176c3e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="4" width="100" height="10" uuid="cd947e0f-e910-4ea3-9019-e333dc92b33d"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.reportDate}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
-	<summary splitType="Stretch"/>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
 </jasperReport>
