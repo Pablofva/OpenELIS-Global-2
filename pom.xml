@@ -460,11 +460,11 @@
       <version>7.0.1</version>
       <exclusions>
         <exclusion>
-          <groupId>org.bouncycastle</groupId>
-          <artifactId>bcprov-jdk15on</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+      </exclusion>
+    </exclusions>
+</dependency>
     <dependency>
       <groupId>com.sun.activation</groupId>
       <artifactId>javax.activation</artifactId>
