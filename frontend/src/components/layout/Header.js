@@ -42,6 +42,7 @@ import {
 import SlideOverNotifications from "../notifications/SlideOverNotifications";
 import { getFromOpenElisServer, putToOpenElisServer } from "../utils/Utils";
 import SearchBar from "./search/searchBar";
+
 function OEHeader(props) {
   const { configurationProperties } = useContext(ConfigurationContext);
   const { userSessionDetails, logout } = useContext(UserSessionDetailsContext);
@@ -70,6 +71,14 @@ function OEHeader(props) {
     window.scrollTo(0, scrollRef.current);
   }, []);
 
+  // Definir las palabras clave para ocultar
+  const HIDDEN_MENU_KEYWORDS = ["workplan", "pathology", "immunohistochemistry", "citology"];
+
+  // Función para verificar si un elemento debe ocultarse
+  const shouldHideMenuItem = (elementId) => {
+    return HIDDEN_MENU_KEYWORDS.some(keyword => elementId.toLowerCase().includes(keyword.toLowerCase()));
+  };
+
   useEffect(() => {
     getFromOpenElisServer("/rest/menu", (res) => {
       handleMenuItems("menu", res);
@@ -80,10 +89,23 @@ function OEHeader(props) {
     return userSessionDetails.authenticated ? "User" : "Lang";
   };
 
+  // Función para filtrar los ítems del menú
   const handleMenuItems = (tag, res) => {
     if (res) {
-      let newMenus = menus;
-      newMenus[tag] = res;
+      // Función recursiva para filtrar ítems del menú y sus submenús
+      const filterMenuItems = (items) => {
+        return items
+            .filter(menuItem => !shouldHideMenuItem(menuItem.menu.elementId))
+            .map(menuItem => ({
+              ...menuItem,
+              childMenus: filterMenuItems(menuItem.childMenus)
+            }));
+      };
+
+      const filteredMenuItems = filterMenuItems(res);
+
+      let newMenus = { ...menus };
+      newMenus[tag] = filteredMenuItems;
       setMenus(newMenus);
     }
   };
@@ -182,42 +204,44 @@ function OEHeader(props) {
     setSearchBar(!searchBar);
   };
   const generateMenuItems = (menuItem, index, level, path) => {
+    // Verificar si el ítem debe ocultarse
+    if (shouldHideMenuItem(menuItem.menu.elementId)) {
+      return null; // O retorna <React.Fragment key={path}></React.Fragment>
+    }
+
     if (menuItem.menu.isActive) {
       if (level === 0 && menuItem.childMenus.length > 0) {
         return (
-          <span id={menuItem.menu.elementId} key={path}>
+            <span id={menuItem.menu.elementId} key={path}>
             <span
-              id={menuItem.menu.elementId + "_dropdown"}
-              onClick={(e) => {
-                setMenuItemExpanded(e, menuItem, path);
-              }}
+                id={menuItem.menu.elementId + "_dropdown"}
+                onClick={(e) => {
+                  setMenuItemExpanded(e, menuItem, path);
+                }}
             >
               <SideNavMenu
-                className="top-level-menu-item"
-                aria-label={intl.formatMessage({
-                  id: menuItem.menu.displayKey,
-                })}
-                title={intl.formatMessage({
-                  id: menuItem.menu.displayKey,
-                })}
-                key={"menu_" + index + "_" + level}
-                defaultExpanded={menuItem.expanded}
-                // onClick={(e) => { // not supported yet, but if it becomes so we can simplify the functionality here by having this here and not have a span around it
-                //   setMenuItemExpanded(e, menuItem, path);
-                // }}
+                  className="top-level-menu-item"
+                  aria-label={intl.formatMessage({
+                    id: menuItem.menu.displayKey,
+                  })}
+                  title={intl.formatMessage({
+                    id: menuItem.menu.displayKey,
+                  })}
+                  key={"menu_" + index + "_" + level}
+                  defaultExpanded={menuItem.expanded}
               >
                 <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
                 >
                   {menuItem.childMenus.map((childMenuItem, index) => {
                     return generateMenuItems(
-                      childMenuItem,
-                      index,
-                      level + 1,
-                      path + ".childMenus[" + index + "]",
+                        childMenuItem,
+                        index,
+                        level + 1,
+                        path + ".childMenus[" + index + "]",
                     );
                   })}
                 </span>
@@ -227,12 +251,12 @@ function OEHeader(props) {
         );
       } else if (level === 0) {
         return (
-          <span key={path} id={menuItem.menu.elementId}>
+            <span key={path} id={menuItem.menu.elementId}>
             <SideNavMenuItem
-              id={menuItem.menu.elementId + "_nav"}
-              href={menuItem.menu.actionURL}
-              target={menuItem.menu.openInNewWindow ? "_blank" : ""}
-              className="top-level-menu-item"
+                id={menuItem.menu.elementId + "_nav"}
+                href={menuItem.menu.actionURL}
+                target={menuItem.menu.openInNewWindow ? "_blank" : ""}
+                className="top-level-menu-item"
             >
               {renderSideNavMenuItemLabel(menuItem, level)}
             </SideNavMenuItem>
@@ -240,43 +264,43 @@ function OEHeader(props) {
         );
       } else {
         return (
-          <span id={menuItem.menu.elementId} key={path}>
+            <span id={menuItem.menu.elementId} key={path}>
             <SideNavMenuItem
-              className="reduced-padding-nav-menu-item"
-              href={menuItem.menu.actionURL}
-              target={menuItem.menu.openInNewWindow ? "_blank" : ""}
-              style={{ width: "100%" }}
-              rel="noreferrer"
+                className="reduced-padding-nav-menu-item"
+                href={menuItem.menu.actionURL}
+                target={menuItem.menu.openInNewWindow ? "_blank" : ""}
+                style={{ width: "100%" }}
+                rel="noreferrer"
             >
               <span style={{ display: "flex", width: "100%" }}>
                 {!menuItem.menu.actionURL &&
-                  !hasActiveChildMenu(menuItem) &&
-                  console.warn("menu entry has no action url and no child")}
+                    !hasActiveChildMenu(menuItem) &&
+                    console.warn("menu entry has no action url and no child")}
                 {!hasActiveChildMenu(menuItem) &&
-                  renderSingleNavButton(menuItem, index, level, path)}
+                    renderSingleNavButton(menuItem, index, level, path)}
                 {!menuItem.menu.actionURL &&
-                  hasActiveChildMenu(menuItem) &&
-                  renderSingleDropdownButton(menuItem, index, level, path)}
+                    hasActiveChildMenu(menuItem) &&
+                    renderSingleDropdownButton(menuItem, index, level, path)}
                 {menuItem.menu.actionURL &&
-                  hasActiveChildMenu(menuItem) &&
-                  renderDualNavDropdownButton(menuItem, index, level, path)}
+                    hasActiveChildMenu(menuItem) &&
+                    renderDualNavDropdownButton(menuItem, index, level, path)}
               </span>
             </SideNavMenuItem>
-            {menuItem.childMenus.map((childMenuItem, index) => {
-              return (
-                <span
-                  key={path + ".childMenus[" + index + "].span"}
-                  style={{ display: menuItem.expanded ? "" : "none" }}
-                >
+              {menuItem.childMenus.map((childMenuItem, index) => {
+                return (
+                    <span
+                        key={path + ".childMenus[" + index + "].span"}
+                        style={{ display: menuItem.expanded ? "" : "none" }}
+                    >
                   {generateMenuItems(
-                    childMenuItem,
-                    index,
-                    level + 1,
-                    path + ".childMenus[" + index + "]",
+                      childMenuItem,
+                      index,
+                      level + 1,
+                      path + ".childMenus[" + index + "]",
                   )}
                 </span>
-              );
-            })}
+                );
+              })}
           </span>
         );
       }
@@ -413,214 +437,215 @@ function OEHeader(props) {
   };
 
   return (
-    <>
-      <div className="container">
-        <Theme>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <HeaderContainer
-              render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-                <Header id="mainHeader" className="mainHeader" aria-label="">
-                  {userSessionDetails.authenticated && (
-                    <HeaderMenuButton
-                      aria-label={
-                        isSideNavExpanded ? "Close menu" : "Open menu"
-                      }
-                      onClick={onClickSideNavExpand}
-                      isActive={isSideNavExpanded}
-                      isCollapsible={true}
-                    />
-                  )}
-                  <HeaderName href="/" prefix="" style={{ padding: "0px" }}>
-                    <span id="header-logo">{logo()}</span>
-                    <div className="banner">
-                      <h5>{configurationProperties?.BANNER_TEXT}</h5>
-                      <p>
-                        <FormattedMessage id="header.label.version" /> &nbsp;{" "}
-                        {configurationProperties?.releaseNumber}
-                      </p>
-                    </div>
-                  </HeaderName>
-                  <HeaderGlobalBar>
-                    {userSessionDetails.authenticated && (
-                      <>
-                        {searchBar && <SearchBar />}
-                        <HeaderGlobalAction
-                          aria-label="Search"
-                          onClick={handleSearch}
-                        >
-                          {!searchBar ? (
-                            <Search size={20} />
-                          ) : (
-                            <Close size={20} />
-                          )}
-                        </HeaderGlobalAction>
-                        <HeaderGlobalAction
-                          aria-label="Notifications"
-                          onClick={toggleSlideOver}
-                        >
-                          <div
-                            style={{
-                              position: "relative",
-                              display: "inline-block",
-                            }}
-                          >
-                            <Notification size={20} />
-                            {unReadNotifications?.length > 0 && (
-                              <span
-                                style={{
-                                  position: "absolute",
-                                  top: "-5px",
-                                  right: "-5px",
-                                  backgroundColor: "#3A6B8D",
-                                  color: "white",
-                                  borderRadius: "50%",
-                                  width: "16px",
-                                  height: "16px",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  fontSize: "10px",
-                                  animation: "pulse 5s infinite",
-                                  opacity: 1,
-                                  transition:
-                                    "background-color 0.3s ease-in-out",
-                                }}
-                              >
+      <>
+        <div className="container">
+          <Theme>
+            <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+            >
+              <HeaderContainer
+                  render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+                      <Header id="mainHeader" className="mainHeader" aria-label="">
+                        {userSessionDetails.authenticated && (
+                            <HeaderMenuButton
+                                aria-label={
+                                  isSideNavExpanded ? "Close menu" : "Open menu"
+                                }
+                                onClick={onClickSideNavExpand}
+                                isActive={isSideNavExpanded}
+                                isCollapsible={true}
+                            />
+                        )}
+                        <HeaderName href="/" prefix="" style={{ padding: "0px" }}>
+                          <span id="header-logo">{logo()}</span>
+                          <div className="banner">
+                            <h5>{configurationProperties?.BANNER_TEXT}</h5>
+                            <p>
+                              <FormattedMessage id="header.label.version" /> &nbsp;{" "}
+                              {configurationProperties?.releaseNumber}
+                            </p>
+                          </div>
+                        </HeaderName>
+                        <HeaderGlobalBar>
+                          {userSessionDetails.authenticated && (
+                              <>
+                                {searchBar && <SearchBar />}
+                                <HeaderGlobalAction
+                                    aria-label="Search"
+                                    onClick={handleSearch}
+                                >
+                                  {!searchBar ? (
+                                      <Search size={20} />
+                                  ) : (
+                                      <Close size={20} />
+                                  )}
+                                </HeaderGlobalAction>
+                                <HeaderGlobalAction
+                                    aria-label="Notifications"
+                                    onClick={toggleSlideOver}
+                                >
+                                  <div
+                                      style={{
+                                        position: "relative",
+                                        display: "inline-block",
+                                      }}
+                                  >
+                                    <Notification size={20} />
+                                    {unReadNotifications?.length > 0 && (
+                                        <span
+                                            style={{
+                                              position: "absolute",
+                                              top: "-5px",
+                                              right: "-5px",
+                                              backgroundColor: "#3A6B8D",
+                                              color: "white",
+                                              borderRadius: "50%",
+                                              width: "16px",
+                                              height: "16px",
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                              fontSize: "10px",
+                                              animation: "pulse 5s infinite",
+                                              opacity: 1,
+                                              transition:
+                                                  "background-color 0.3s ease-in-out",
+                                            }}
+                                        >
                                 {unReadNotifications?.length}
                               </span>
-                            )}
-                          </div>
-                        </HeaderGlobalAction>
-                      </>
-                    )}
-                    <HeaderGlobalAction
-                      aria-label={panelSwitchLabel()}
-                      onClick={clickPanelSwitch}
-                      ref={userSwitchRef}
-                    >
-                      {panelSwitchIcon()}
-                    </HeaderGlobalAction>
-                  </HeaderGlobalBar>
-                  <HeaderPanel
-                    aria-label="Header Panel"
-                    expanded={!switchCollapsed}
-                    className="headerPanel"
-                    ref={headerPanelRef}
-                  >
-                    <ul>
-                      {userSessionDetails.authenticated && (
-                        <>
-                          <li className="userDetails">
-                            <UserAvatarFilledAlt
-                              size={18}
-                              style={{ marginRight: "4px" }}
-                            />
-                            {userSessionDetails.firstName}{" "}
-                            {userSessionDetails.lastName}
-                          </li>
-                          {userSessionDetails.loginLabUnit && (
-                            <li className="userDetails">
-                              <LocationFilled
-                                size={18}
-                                style={{ marginRight: "4px" }}
-                              />
-                              {userSessionDetails.loginLabUnit}{" "}
-                            </li>
+                                    )}
+                                  </div>
+                                </HeaderGlobalAction>
+                              </>
                           )}
-                          <li
-                            className="userDetails clickableUserDetails"
-                            onClick={logout}
+                          <HeaderGlobalAction
+                              aria-label={panelSwitchLabel()}
+                              onClick={clickPanelSwitch}
+                              ref={userSwitchRef}
                           >
-                            <Logout
-                              id="sign-out"
-                              style={{ marginRight: "3px" }}
-                            />
-                            <FormattedMessage id="header.label.logout" />
-                          </li>
-                        </>
-                      )}
-                      <li className="userDetails">
-                        <Select
-                          id="selector"
-                          name="selectLocale"
-                          className="selectLocale"
-                          invalidText="A valid locale value is required"
-                          labelText={
-                            <FormattedMessage id="header.label.selectlocale" />
-                          }
-                          onChange={(event) => {
-                            props.onChangeLanguage(event.target.value);
-                          }}
-                          value={props.intl.locale}
+                            {panelSwitchIcon()}
+                          </HeaderGlobalAction>
+                        </HeaderGlobalBar>
+                        <HeaderPanel
+                            aria-label="Header Panel"
+                            expanded={!switchCollapsed}
+                            className="headerPanel"
+                            ref={headerPanelRef}
                         >
-                          <SelectItem text="English" value="en" />
-                          <SelectItem text="French" value="fr" />
-                        </Select>
-                      </li>
-                      <li className="userDetails">
-                        <label className="cds--label">
-                          {" "}
-                          <FormattedMessage id="header.label.version" />:{" "}
-                          {configurationProperties?.releaseNumber}
-                        </label>
-                      </li>
-                    </ul>
-                  </HeaderPanel>
-                  {userSessionDetails.authenticated && (
-                    <>
-                      <SideNav
-                        aria-label="Side navigation"
-                        expanded={isSideNavExpanded}
-                        isPersistent={false}
-                      >
-                        <SideNavItems>
-                          {menus["menu"].map((childMenuItem, index) => {
-                            // ignore the Home Menu in the new UI
-                            if (childMenuItem.menu.elementId != "menu_home") {
-                              return generateMenuItems(
-                                childMenuItem,
-                                index,
-                                0,
-                                "$.menu[" + index + "]",
-                              );
-                            }
-                          })}
-                        </SideNavItems>
-                      </SideNav>
-                    </>
+                          <ul>
+                            {userSessionDetails.authenticated && (
+                                <>
+                                  <li className="userDetails">
+                                    <UserAvatarFilledAlt
+                                        size={18}
+                                        style={{ marginRight: "4px" }}
+                                    />
+                                    {userSessionDetails.firstName}{" "}
+                                    {userSessionDetails.lastName}
+                                  </li>
+                                  {userSessionDetails.loginLabUnit && (
+                                      <li className="userDetails">
+                                        <LocationFilled
+                                            size={18}
+                                            style={{ marginRight: "4px" }}
+                                        />
+                                        {userSessionDetails.loginLabUnit}{" "}
+                                      </li>
+                                  )}
+                                  <li
+                                      className="userDetails clickableUserDetails"
+                                      onClick={logout}
+                                  >
+                                    <Logout
+                                        id="sign-out"
+                                        style={{ marginRight: "3px" }}
+                                    />
+                                    <FormattedMessage id="header.label.logout" />
+                                  </li>
+                                </>
+                            )}
+                            <li className="userDetails">
+                              <Select
+                                  id="selector"
+                                  name="selectLocale"
+                                  className="selectLocale"
+                                  invalidText="A valid locale value is required"
+                                  labelText={
+                                    <FormattedMessage id="header.label.selectlocale" />
+                                  }
+                                  onChange={(event) => {
+                                    props.onChangeLanguage(event.target.value);
+                                  }}
+                                  value={props.intl.locale}
+                              >
+                                <SelectItem text="English" value="en" />
+                                <SelectItem text="French" value="fr" />
+                              </Select>
+                            </li>
+                            <li className="userDetails">
+                              <label className="cds--label">
+                                {" "}
+                                <FormattedMessage id="header.label.version" />:{" "}
+                                {configurationProperties?.releaseNumber}
+                              </label>
+                            </li>
+                          </ul>
+                        </HeaderPanel>
+                        {userSessionDetails.authenticated && (
+                            <>
+                              <SideNav
+                                  aria-label="Side navigation"
+                                  expanded={isSideNavExpanded}
+                                  isPersistent={false}
+                              >
+                                <SideNavItems>
+                                  {menus["menu"].map((childMenuItem, index) => {
+                                    // ignore the Home Menu in the new UI
+                                    if (childMenuItem.menu.elementId !== "menu_home") {
+                                      const generatedItem = generateMenuItems(
+                                          childMenuItem,
+                                          index,
+                                          0,
+                                          "$.menu[" + index + "]",
+                                      );
+                                      return generatedItem ? generatedItem : null;
+                                    }
+                                  })}
+                                </SideNavItems>
+                              </SideNav>
+                            </>
+                        )}
+                      </Header>
                   )}
-                </Header>
-              )}
-            />
-            <div style={{ flex: 1 }}>
-              <SlideOver
-                open={isOpen}
-                setOpen={setIsOpen}
-                slideFrom="right"
-                title="Notifications"
-              >
-                <SlideOverNotifications
-                  loading={loading}
-                  notifications={
-                    showRead ? readNotifications : unReadNotifications
-                  }
-                  showRead={showRead}
-                  markNotificationAsRead={markNotificationAsRead}
-                  getNotifications={getNotifications}
-                  setShowRead={setShowRead}
-                  markAllNotificationsAsRead={markAllNotificationsAsRead}
-                />
-              </SlideOver>
+              />
+              <div style={{ flex: 1 }}>
+                <SlideOver
+                    open={isOpen}
+                    setOpen={setIsOpen}
+                    slideFrom="right"
+                    title="Notifications"
+                >
+                  <SlideOverNotifications
+                      loading={loading}
+                      notifications={
+                        showRead ? readNotifications : unReadNotifications
+                      }
+                      showRead={showRead}
+                      markNotificationAsRead={markNotificationAsRead}
+                      getNotifications={getNotifications}
+                      setShowRead={setShowRead}
+                      markAllNotificationsAsRead={markAllNotificationsAsRead}
+                  />
+                </SlideOver>
+              </div>
             </div>
-          </div>
-        </Theme>
-      </div>
-    </>
+          </Theme>
+        </div>
+      </>
   );
 }
 
