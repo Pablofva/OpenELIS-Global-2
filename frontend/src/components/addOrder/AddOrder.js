@@ -267,17 +267,20 @@ const AddOrder = (props) => {
     }
   }
 
-  function handleAutoCompleteSiteName(siteId) {
-    setOrderFormValues({
-      ...orderFormValues,
-      sampleOrderItems: {
-        ...orderFormValues.sampleOrderItems,
-        referringSiteId: siteId,
-        referringSiteName: "",
-        referringSiteDepartmentId: "",
-      },
-    });
-  }
+  const handleAutoCompleteSiteName = (siteId) => {
+    const selectedSite = siteNames.find((site) => site.id === siteId);
+    if (selectedSite) {
+      setOrderFormValues((prevValues) => ({
+        ...prevValues,
+        sampleOrderItems: {
+          ...prevValues.sampleOrderItems,
+          referringSiteId: selectedSite.id,
+          referringSiteName: selectedSite.name,
+        },
+      }));
+    }
+  };
+
   const loadDepartments = (data) => {
     setDepartments(data);
   };
@@ -432,8 +435,22 @@ const AddOrder = (props) => {
       setPaymentOptions(response.sampleOrderItems.paymentOptions);
       setSamplingPerformed(response.sampleOrderItems.testLocationCodeList);
       setProviders(response.sampleOrderItems.providersList);
+
+      // Seleccionar automáticamente el primer sitio si existe
+      if (response.sampleOrderItems.referringSiteList.length > 0) {
+        const firstSite = response.sampleOrderItems.referringSiteList[0];
+        setOrderFormValues((prevValues) => ({
+          ...prevValues,
+          sampleOrderItems: {
+            ...prevValues.sampleOrderItems,
+            referringSiteId: firstSite.id, // Asegúrate de que 'id' es el campo correcto
+            referringSiteName: firstSite.name, // Asegúrate de que 'name' es el campo correcto
+          },
+        }));
+      }
     }
   };
+
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -594,31 +611,24 @@ const AddOrder = (props) => {
             </Column>
             <Column lg={8} md={4} sm={4}>
               <AutoComplete
-                name="siteName"
-                id="siteName"
-                allowFreeText={
-                  !(
-                    configurationProperties.restrictFreeTextRefSiteEntry ===
-                    "true"
-                  )
-                }
-                value={
-                  orderFormValues.sampleOrderItems.referringSiteId != ""
-                    ? orderFormValues.sampleOrderItems.referringSiteId
-                    : orderFormValues.sampleOrderItems.referringSiteName
-                }
-                onChange={handleSiteName}
-                onSelect={handleAutoCompleteSiteName}
-                label={
-                  <>
-                    <FormattedMessage id="order.search.site.name" />{" "}
-                    <span className="requiredlabel">*</span>
-                  </>
-                }
-                style={{ width: "!important 100%" }}
-                suggestions={siteNames.length > 0 ? siteNames : []}
-                required
+                  name="siteName"
+                  id="siteName"
+                  allowFreeText={false} // Opcional: Deshabilita la entrada libre de texto
+                  value={orderFormValues.sampleOrderItems.referringSiteName || ""}
+                  onChange={handleSiteName}
+                  onSelect={handleAutoCompleteSiteName}
+                  label={
+                    <>
+                      <FormattedMessage id="order.search.site.name" />{" "}
+                      <span className="requiredlabel">*</span>
+                    </>
+                  }
+                  style={{ width: "100%" }}
+                  suggestions={siteNames.length > 0 ? siteNames : []}
+                  required
+                  disabled={true} // Opcional: Deshabilita el componente para evitar cambios
               />
+
               {/* )} */}
             </Column>
             <Column lg={8} md={4} sm={4}>
