@@ -6,6 +6,17 @@
 #header-logo {
   margin: 10px;
 }
+/* Ajustes para evitar el corte del texto en SideNav */
+.bx--side-nav {
+  width: 250px; /* Ajusta el ancho del SideNav según tus necesidades */
+}
+
+.bx--side-nav__link, .bx--side-nav__menu-item {
+  max-width: 250px; /* Ajusta el ancho máximo de los enlaces y elementos del menú */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta cualquier desbordamiento */
+  text-overflow: ellipsis; /* Muestra '...' si el texto es demasiado largo */
+}
 
 #mainHeader {
   z-index: 8001;

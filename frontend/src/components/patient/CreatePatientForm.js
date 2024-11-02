@@ -401,7 +401,7 @@ function CreatePatientForm(props) {
                 {" "}
                 <br></br>
               </Column>
-              <Column lg={8} md={4} sm={4}>
+              <Column lg={8} md={4} sm={4} style={{ display: "none" }}>
                 <Field name="subjectNumber">
                   {({ field }) => (
                     <>
