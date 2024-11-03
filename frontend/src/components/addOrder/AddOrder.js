@@ -438,15 +438,26 @@ const AddOrder = (props) => {
       setSamplingPerformed(response.sampleOrderItems.testLocationCodeList);
       setProviders(response.sampleOrderItems.providersList);
 
-      // Seleccionar automáticamente el primer sitio si existe
-      if (response.sampleOrderItems.referringSiteList.length > 0) {
-        const firstSite = response.sampleOrderItems.referringSiteList[0];
+      let selectedSite = null;
+
+      if (initialSiteId) {
+        selectedSite = response.sampleOrderItems.referringSiteList.find(
+            (site) => site.id === initialSiteId
+        );
+      }
+
+      if (!selectedSite && response.sampleOrderItems.referringSiteList.length > 0) {
+        // Si no se encuentra el sitio inicial, selecciona el primero
+        selectedSite = response.sampleOrderItems.referringSiteList[0];
+      }
+
+      if (selectedSite) {
         setOrderFormValues((prevValues) => ({
           ...prevValues,
           sampleOrderItems: {
             ...prevValues.sampleOrderItems,
-            referringSiteId: firstSite.id, // Asegúrate de que 'id' es el campo correcto
-            referringSiteName: firstSite.name, // Asegúrate de que 'name' es el campo correcto
+            referringSiteId: selectedSite.id,
+            referringSiteName: selectedSite.name,
           },
         }));
       }
@@ -630,8 +641,6 @@ const AddOrder = (props) => {
                   required
                   disabled={true} // Opcional: Deshabilita el componente para evitar cambios
               />
-
-              {/* )} */}
             </Column>
             <Column lg={8} md={4} sm={4}>
               <Select
