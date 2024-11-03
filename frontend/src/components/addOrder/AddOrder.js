@@ -642,7 +642,7 @@ const AddOrder = (props) => {
                   disabled={true} // Opcional: Deshabilita el componente para evitar cambios
               />
             </Column>
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} display={none}>
               <Select
                 id="requesterDepartmentId"
                 name="requesterDepartmentId"
@@ -663,7 +663,7 @@ const AddOrder = (props) => {
                 ))}
               </Select>
             </Column>
-            <Column lg={16} md={8} sm={3}>
+            <Column lg={16} md={8} sm={3} display={none}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -696,7 +696,7 @@ const AddOrder = (props) => {
             {/* <Column lg={8} md={4} sm={4}>
               {" "}
             </Column> */}
-            <Column lg={16} md={4} sm={3}>
+            <Column lg={16} md={4} sm={3} display={none}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -726,7 +726,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} display={none}>
               <TextInput
                 name="requesterLastName"
                 placeholder={intl.formatMessage({
@@ -751,11 +751,11 @@ const AddOrder = (props) => {
                 invalidText={error("sampleOrderItems.providerLastName")}
               />
             </Column>
-            <Column lg={16} md={8} sm={3}>
+            <Column lg={16} md={8} sm={3} display={none}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} sm={4}>
+            <Column lg={8} sm={4} display={none}>
               <TextInput
                 name="providerWorkPhone"
                 placeholder={intl.formatMessage({
@@ -775,7 +775,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} display={none}>
               <TextInput
                 name="providerFax"
                 placeholder={intl.formatMessage({
@@ -793,7 +793,7 @@ const AddOrder = (props) => {
                 id="providerFaxId"
               />
             </Column>
-            <Column lg={16} md={8} sm={3}>
+            <Column lg={16} md={8} sm={3} display={none}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -820,7 +820,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} display={none}>
               <Select
                 id="paymentOptionSelectionId"
                 name="paymentOptionSelections"
@@ -844,7 +844,7 @@ const AddOrder = (props) => {
                   })}
               </Select>
             </Column>
-            <Column lg={16} md={8} sm={3}>
+            <Column lg={16} md={8} sm={3} >
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
