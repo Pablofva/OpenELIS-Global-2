@@ -377,6 +377,14 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
             reportItem.setCompleteFlag(MessageUtil
                     .getMessage(sampleCompleteMap.get(reportItem.getAccessionNumber()) ? "report.status.complete"
                             : "report.status.partial"));
+            if (reportItem.isCorrectedResult()) {
+                if (reportItem.getNote() != null && reportItem.getNote().length() > 0) {
+                    reportItem.setNote(reportItem.getNote());
+                } else {
+                    reportItem.setNote(MessageUtil.getMessage("result.corrected"));
+                }
+            }
+
             reportItem
                     .setCorrectedResult(sampleCorrectedMap.get(reportItem.getAccessionNumber().split("_")[0]) != null);
         }
