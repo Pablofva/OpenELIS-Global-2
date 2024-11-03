@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.0  -->
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RetroCIHeader" pageWidth="572" pageHeight="94" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" resourceBundle="languages/message" uuid="6a99c06e-2c5d-4c64-9323-fae0a2a19849">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
@@ -57,7 +57,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{labName1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Laboratorio De Analisis Clinicos y Bacteriologicos]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement positionType="Float" x="126" y="42" width="310" height="16" uuid="a125b9e4-21d0-4c94-93da-f8ccaed3252f"/>
@@ -71,7 +71,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{labName2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Nora Isabel Noziglia]]></textFieldExpression>
 			</textField>
 			<elementGroup>
 				<image hAlign="Right" isUsingCache="true" onErrorType="Blank">
@@ -79,7 +79,7 @@
 					<imageExpression><![CDATA[$P{rightHeaderImage}]]></imageExpression>
 				</image>
 				<image isUsingCache="true">
-					<reportElement x="1" y="1" width="100" height="88" uuid="c464fbb9-16cb-4bfc-9830-59182621aad1"/>
+					<reportElement x="1" y="1" width="109" height="93" uuid="c464fbb9-16cb-4bfc-9830-59182621aad1"/>
 					<imageExpression><![CDATA[$P{leftHeaderImage}]]></imageExpression>
 				</image>
 			</elementGroup>
