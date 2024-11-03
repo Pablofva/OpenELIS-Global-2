@@ -371,6 +371,8 @@ const AddOrder = (props) => {
           receivedDateForDisplay: configurationProperties.currentDateAsText,
           nextVisitDate: configurationProperties.currentDateAsText,
           receivedTime: configurationProperties.currentTimeAsText,
+          providerFirstName: "NombreInicial", // Valor inicial para el nombre
+          providerLastName: "ApellidoInicial",
         },
       });
     }
