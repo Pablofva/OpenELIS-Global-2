@@ -438,26 +438,15 @@ const AddOrder = (props) => {
       setSamplingPerformed(response.sampleOrderItems.testLocationCodeList);
       setProviders(response.sampleOrderItems.providersList);
 
-      let selectedSite = null;
-
-      if (initialSiteId) {
-        selectedSite = response.sampleOrderItems.referringSiteList.find(
-            (site) => site.id === initialSiteId
-        );
-      }
-
-      if (!selectedSite && response.sampleOrderItems.referringSiteList.length > 0) {
-        // Si no se encuentra el sitio inicial, selecciona el primero
-        selectedSite = response.sampleOrderItems.referringSiteList[0];
-      }
-
-      if (selectedSite) {
+      // Seleccionar automáticamente el primer sitio si existe
+      if (response.sampleOrderItems.referringSiteList.length > 0) {
+        const firstSite = response.sampleOrderItems.referringSiteList[0];
         setOrderFormValues((prevValues) => ({
           ...prevValues,
           sampleOrderItems: {
             ...prevValues.sampleOrderItems,
-            referringSiteId: selectedSite.id,
-            referringSiteName: selectedSite.name,
+            referringSiteId: firstSite.id, // Asegúrate de que 'id' es el campo correcto
+            referringSiteName: firstSite.name, // Asegúrate de que 'name' es el campo correcto
           },
         }));
       }
@@ -641,8 +630,10 @@ const AddOrder = (props) => {
                   required
                   disabled={true} // Opcional: Deshabilita el componente para evitar cambios
               />
+
+              {/* )} */}
             </Column>
-            <Column lg={8} md={4} sm={4} display={none}>
+            <Column lg={8} md={4} sm={4}>
               <Select
                 id="requesterDepartmentId"
                 name="requesterDepartmentId"
@@ -663,7 +654,7 @@ const AddOrder = (props) => {
                 ))}
               </Select>
             </Column>
-            <Column lg={16} md={8} sm={3} display={none}>
+            <Column lg={16} md={8} sm={3}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -696,7 +687,7 @@ const AddOrder = (props) => {
             {/* <Column lg={8} md={4} sm={4}>
               {" "}
             </Column> */}
-            <Column lg={16} md={4} sm={3} display={none}>
+            <Column lg={16} md={4} sm={3}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -726,7 +717,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4} display={none}>
+            <Column lg={8} md={4} sm={4}>
               <TextInput
                 name="requesterLastName"
                 placeholder={intl.formatMessage({
@@ -751,11 +742,11 @@ const AddOrder = (props) => {
                 invalidText={error("sampleOrderItems.providerLastName")}
               />
             </Column>
-            <Column lg={16} md={8} sm={3} display={none}>
+            <Column lg={16} md={8} sm={3}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} sm={4} display={none}>
+            <Column lg={8} sm={4}>
               <TextInput
                 name="providerWorkPhone"
                 placeholder={intl.formatMessage({
@@ -775,7 +766,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4} display={none}>
+            <Column lg={8} md={4} sm={4}>
               <TextInput
                 name="providerFax"
                 placeholder={intl.formatMessage({
@@ -793,7 +784,7 @@ const AddOrder = (props) => {
                 id="providerFaxId"
               />
             </Column>
-            <Column lg={16} md={8} sm={3} display={none}>
+            <Column lg={16} md={8} sm={3}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
@@ -820,7 +811,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4} display={none}>
+            <Column lg={8} md={4} sm={4}>
               <Select
                 id="paymentOptionSelectionId"
                 name="paymentOptionSelections"
@@ -844,7 +835,7 @@ const AddOrder = (props) => {
                   })}
               </Select>
             </Column>
-            <Column lg={16} md={8} sm={3} >
+            <Column lg={16} md={8} sm={3}>
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
