@@ -179,6 +179,7 @@ public class ExportRoutineByDate extends CSVRoutineSampleExportReport
      * project.setProjectName("Antiretroviral Study");
      * projects.add(projectService.getProjectByName(project, false, false));
      * project.setProjectName("Antiretroviral Followup Study");
+     * project.setProjectName("Antiretroviral Followup Study");
      * projects.add(projectService.getProjectByName(project, false, false));
      * project.setProjectName("Routine HIV Testing");
      * projects.add(projectService.getProjectByName(project, false, false));
