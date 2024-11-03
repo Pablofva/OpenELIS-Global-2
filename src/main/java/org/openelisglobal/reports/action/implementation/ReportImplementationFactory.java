@@ -197,7 +197,7 @@ public class ReportImplementationFactory {
             } else if (report.equals("patientCILNSP")) {
                 return new PatientCILNSPClinical();
             } else if (report.equals("patientCILNSP_vreduit")) {
-                return new PatientCILNSPClinical();
+                return new PatientCILNSPClinical_vreduit();
                 // return new PatientCILNSPClinical();
             } else if (report.equals("TBPatientReport")) {
                 return new TBPatientReport();
