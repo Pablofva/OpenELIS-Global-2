@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const ModifyOrderEntryValidationSchema = Yup.object().shape({
   sampleOrderItems: Yup.object()
     .shape({
-      labNo: Yup.string().required("Sample Lab Number is required"),
+      labNo: Yup.string().required("Numero de Boleta requerido"),
       referringSiteName: Yup.string(),
       referringSiteId: Yup.string(),
       providerLastName: Yup.string().required(
@@ -12,7 +12,7 @@ const ModifyOrderEntryValidationSchema = Yup.object().shape({
       providerFirstName: Yup.string().required(
         "Requester First Name is required",
       ),
-      providerEmail: Yup.string().email("Invalid Email"),
+      providerEmail: Yup.string().email("Email invalido"),
     })
     .test("referringSiteName", "Referring Site is required", function (value) {
       const { referringSiteName, referringSiteId } = value || {};
