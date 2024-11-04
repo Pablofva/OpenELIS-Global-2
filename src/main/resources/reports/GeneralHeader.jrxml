@@ -43,36 +43,20 @@
 	</columnHeader>
 	<detail>
 		<band height="94" splitType="Stretch">
-			<textField isBlankWhenNull="false">
-				<reportElement key="textField-1" x="2" y="80" width="568" height="13" uuid="06e3f9bd-80c7-41ba-bc86-8ded53958a5f">
-					<printWhenExpression><![CDATA[$P{directorName} != null]]></printWhenExpression>
-				</reportElement>
+			<staticText>
+				<reportElement x="2" y="10" width="568" height="25" uuid="440b2b1f-ad0e-4be8-abfc-bf7dd593e5d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{report.labManager} + ": " + $P{directorName}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="2" y="2" width="568" height="13" uuid="440b2b1f-ad0e-4be8-abfc-bf7dd593e5d5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[Laboratorio De Analisis Clinicos y Bacteriologicos]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement positionType="Float" x="126" y="42" width="310" height="16" uuid="a125b9e4-21d0-4c94-93da-f8ccaed3252f"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="2" y="21" width="568" height="13" backcolor="#FFFFFF" uuid="29515185-af4b-49c6-ae92-f2cca6a33002"/>
+				<text><![CDATA[Laboratorio De Analisis Clinicos y Bacteriologicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="35" width="568" height="20" backcolor="#FFFFFF" uuid="29515185-af4b-49c6-ae92-f2cca6a33002"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-					<font size="10" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[Nora Isabel Noziglia]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[Nora Isabel Noziglia - Bioq. M.P 2726]]></text>
+			</staticText>
 			<elementGroup>
 				<image hAlign="Right" isUsingCache="true" onErrorType="Blank">
 					<reportElement x="468" y="1" width="100" height="88" uuid="8c25b4f1-cbd1-44ac-ba39-f40b530180c5"/>
@@ -83,6 +67,13 @@
 					<imageExpression><![CDATA[$P{leftHeaderImage}]]></imageExpression>
 				</image>
 			</elementGroup>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="76" width="568" height="13" backcolor="#FFFFFF" uuid="3a254214-b61a-4284-aba5-c260cc535816"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avenida San Martin 2953 - (1888) Florencio Varela]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
