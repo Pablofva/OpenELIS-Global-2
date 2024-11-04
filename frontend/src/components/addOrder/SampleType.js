@@ -455,7 +455,7 @@ const SampleType = (props) => {
           }}
           required
         >
-          <SelectItem text="Select sample type" value="" />
+          <SelectItem text="Elegir tipo de muestra" value="" />
           {sampleTypes?.map((sampleType, i) => (
             <SelectItem text={sampleType.value} value={sampleType.id} key={i} />
           ))}

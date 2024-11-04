@@ -691,7 +691,7 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} style={{ display: "none" }}>
               <TextInput
                 name="requesterFirstName"
                 placeholder={intl.formatMessage({
@@ -717,7 +717,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} style={{ display: "none" }} >
               <TextInput
                 name="requesterLastName"
                 placeholder={intl.formatMessage({
@@ -742,11 +742,11 @@ const AddOrder = (props) => {
                 invalidText={error("sampleOrderItems.providerLastName")}
               />
             </Column>
-            <Column lg={16} md={8} sm={3}>
+            <Column lg={16} md={8} sm={3} >
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} sm={4}>
+            <Column lg={8} sm={4} style={{ display: "none" }}>
               <TextInput
                 name="providerWorkPhone"
                 placeholder={intl.formatMessage({
@@ -766,7 +766,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4}style={{ display: "none" }}>
               <TextInput
                 name="providerFax"
                 placeholder={intl.formatMessage({
@@ -788,7 +788,7 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} style={{ display: "none" }}>
               <TextInput
                 name="providerEmail"
                 placeholder={intl.formatMessage({
@@ -811,7 +811,7 @@ const AddOrder = (props) => {
               />
             </Column>
 
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} >
               <Select
                 id="paymentOptionSelectionId"
                 name="paymentOptionSelections"
