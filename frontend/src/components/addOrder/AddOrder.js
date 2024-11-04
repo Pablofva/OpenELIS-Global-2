@@ -658,7 +658,7 @@ const AddOrder = (props) => {
               {" "}
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
             </Column>
-            <Column lg={8} md={4} sm={4}>
+            <Column lg={8} md={4} sm={4} style={{ display: "none" }}>
               <AutoComplete
                 name="requesterId"
                 id="requesterId"
