@@ -1,9 +1,8 @@
 import * as Yup from "yup";
 
 const CreatePatientValidationSchema = Yup.object().shape({
-  nationalId: Yup.string().required("National ID Required"),
-  birthDateForDisplay: Yup.string()
-    .required("Patient Birth date Required")
+  nationalId: Yup.string().required("Se requiere Dni"),
+  birthDateForDisplay: Yup.string().required("Se requiere Fecha de Nacimiento")
     .test("valid-date", "Invalid date format", function (value) {
       const dateFormat = /^\d{2}\/\d{2}\/\d{4}$/;
       if (!value || !value.match(dateFormat)) {
@@ -20,10 +19,10 @@ const CreatePatientValidationSchema = Yup.object().shape({
     }),
   patientContact: Yup.object().shape({
     person: Yup.object().shape({
-      email: Yup.string().email("Contact Email Must Be Valid"),
+      email: Yup.string().email("Email de contacto debe ser valido"),
     }),
   }),
-  gender: Yup.string().required("Gender is Required"),
+  gender: Yup.string().required("Genero es requerido"),
 });
 
 export default CreatePatientValidationSchema;

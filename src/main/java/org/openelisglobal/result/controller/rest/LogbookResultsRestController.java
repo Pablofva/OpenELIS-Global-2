@@ -560,14 +560,14 @@ public class LogbookResultsRestController extends LogbookResultsBaseController {
             analysis.setCorrectedSincePatientReport(
                     resultSaveService.isUpdatedResult() && analysisService.patientReportHasBeenDone(analysis));
 
-            if (analysisService.hasBeenCorrectedSinceLastPatientReport(analysis)) {
-                Note note = noteService.createSavableNote(analysis, NoteType.EXTERNAL,
-                        MessageUtil.getMessage("note.corrected.result"), RESULT_SUBJECT, getSysUserId(request));
-                if (!noteService.duplicateNoteExists(note)) {
-                    actionDataSet.addToNoteList(noteService.createSavableNote(analysis, NoteType.EXTERNAL,
-                            MessageUtil.getMessage("note.corrected.result"), RESULT_SUBJECT, getSysUserId(request)));
-                }
-            }
+            //  if (analysisService.hasBeenCorrectedSinceLastPatientReport(analysis)) {
+            //  Note note = noteService.createSavableNote(analysis, NoteType.EXTERNAL,
+            //        MessageUtil.getMessage("note.corrected.result"), RESULT_SUBJECT, getSysUserId(request));
+            //  if (!noteService.duplicateNoteExists(note)) {
+            //      actionDataSet.addToNoteList(noteService.createSavableNote(analysis, NoteType.EXTERNAL,
+            //             MessageUtil.getMessage("note.corrected.result"), RESULT_SUBJECT, getSysUserId(request)));
+            //  }
+            // }
 
             // If there is more than one result then each user selected reflex gets mapped
             // to that result
