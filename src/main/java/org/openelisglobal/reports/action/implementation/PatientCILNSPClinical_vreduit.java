@@ -315,7 +315,11 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
                 if (sectionSort != 0) {
                     return sectionSort;
                 }
+                int panelSort = comparePanelNames(o1.getPanelName(), o2.getPanelName());
 
+                if (panelSort != 0) {
+                    return panelSort;
+                }
                 int sampleTypeSort = o1.getSampleType().compareTo(o2.getSampleType());
 
                 if (sampleTypeSort != 0) {
@@ -392,7 +396,18 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
     protected String getReportNameForParameterPage() {
         return MessageUtil.getMessage("openreports.patientTestStatus");
     }
-
+    private int comparePanelNames(String panelName1, String panelName2) {
+        if (panelName1 == null && panelName2 == null) {
+            return 0;
+        }
+        if (panelName1 == null) {
+            return -1;
+        }
+        if (panelName2 == null) {
+            return 1;
+        }
+        return panelName1.compareTo(panelName2);
+    }
     @Override
     public JRDataSource getReportDataSource() throws IllegalStateException {
         if (!initialized) {
