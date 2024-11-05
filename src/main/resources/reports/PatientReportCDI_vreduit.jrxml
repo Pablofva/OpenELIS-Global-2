@@ -718,16 +718,14 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + $P{headerName}]]></subreportExpression>
 			</subreport>
-			<textField>
-				<reportElement mode="Transparent" x="0" y="93" width="552" height="16" isRemoveLineWhenBlank="true" uuid="460d5d84-d231-4fde-b415-331dbe62095e">
-					<printWhenExpression><![CDATA[$F{correctedResult}]]></printWhenExpression>
-				</reportElement>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="93" width="552" height="16" uuid="460d5d84-d231-4fde-b415-331dbe62095e"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="12" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{report.correctedReport}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[Resultados de Análisis]]></text>
+			</staticText>
 			<textField>
 				<reportElement mode="Opaque" x="1" y="110" width="550" height="13" uuid="ac1cdc50-39a0-4fd1-bc38-eab214d6eb34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

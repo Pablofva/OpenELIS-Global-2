@@ -44,14 +44,14 @@
 	<detail>
 		<band height="94" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="10" width="568" height="25" uuid="440b2b1f-ad0e-4be8-abfc-bf7dd593e5d5"/>
+				<reportElement x="110" y="10" width="358" height="25" uuid="440b2b1f-ad0e-4be8-abfc-bf7dd593e5d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Laboratorio De Analisis Clinicos y Bacteriologicos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="2" y="35" width="568" height="20" backcolor="#FFFFFF" uuid="29515185-af4b-49c6-ae92-f2cca6a33002"/>
+				<reportElement mode="Transparent" x="110" y="35" width="358" height="20" backcolor="#FFFFFF" uuid="29515185-af4b-49c6-ae92-f2cca6a33002"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -68,11 +68,11 @@
 				</image>
 			</elementGroup>
 			<staticText>
-				<reportElement mode="Transparent" x="2" y="76" width="568" height="13" backcolor="#FFFFFF" uuid="3a254214-b61a-4284-aba5-c260cc535816"/>
+				<reportElement mode="Transparent" x="110" y="76" width="356" height="13" backcolor="#FFFFFF" uuid="3a254214-b61a-4284-aba5-c260cc535816"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Avenida San Martin 2953 - (1888) Florencio Varela]]></text>
+				<text><![CDATA[Av. San Martin 2953 - (1888) Florencio Varela - Tel : 4255-6030]]></text>
 			</staticText>
 		</band>
 	</detail>
