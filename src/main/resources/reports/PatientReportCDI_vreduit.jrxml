@@ -363,7 +363,7 @@
 						<box leftPadding="0">
 							<pen lineWidth="0.5"/>
 						</box>
-						<textElement verticalAlignment="Middle">
+						<textElement textAlignment="Center" verticalAlignment="Middle">
 							<font size="8"/>
 							<paragraph lineSpacing="Single"/>
 						</textElement>
@@ -389,7 +389,7 @@
 						<box leftPadding="4">
 							<pen lineWidth="0.5"/>
 						</box>
-						<textElement verticalAlignment="Middle">
+						<textElement textAlignment="Center" verticalAlignment="Middle">
 							<font size="8"/>
 							<paragraph lineSpacing="Single"/>
 						</textElement>
