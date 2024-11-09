@@ -177,7 +177,7 @@
 		<groupHeader>
 			<band height="75" splitType="Prevent">
 				<frame>
-					<reportElement x="0" y="1" width="552" height="70" isRemoveLineWhenBlank="true" forecolor="rgba(255, 102, 102, 0.0)" backcolor="#33FFFF" uuid="b298bb54-931c-4ee2-a6b2-05fae5ce0689">
+					<reportElement x="0" y="1" width="552" height="49" isRemoveLineWhenBlank="true" forecolor="rgba(255, 102, 102, 0.0)" backcolor="#33FFFF" uuid="b298bb54-931c-4ee2-a6b2-05fae5ce0689">
 						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 					</reportElement>
 					<box>
@@ -449,21 +449,6 @@
 						</textElement>
 						<text><![CDATA[Nro Orden]]></text>
 					</staticText>
-					<textField>
-						<reportElement mode="Transparent" x="0" y="74" width="551" height="20" backcolor="#FFFFFF" uuid="3945efd6-c42a-4e6a-8657-3cae84c4698c"/>
-						<box>
-							<pen lineWidth="0.0"/>
-							<topPen lineWidth="0.0"/>
-							<leftPen lineWidth="0.0"/>
-							<bottomPen lineWidth="0.0"/>
-							<rightPen lineWidth="0.0"/>
-						</box>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="9" isBold="true"/>
-							<paragraph lineSpacing="Single"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{testSection}]]></textFieldExpression>
-					</textField>
 				</frame>
 				<textField>
 					<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="60" width="0" height="0" backcolor="#E6E6E6" uuid="2d6c8a28-2fce-47ff-8835-070e5ca6b3c3">
