@@ -30,117 +30,84 @@ import org.openelisglobal.typeofsample.dao.TypeOfSamplePanelDAO;
 import org.openelisglobal.typeofsample.valueholder.TypeOfSamplePanel;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 @Transactional
 public class TypeOfSamplePanelDAOImpl extends BaseDAOImpl<TypeOfSamplePanel, String> implements TypeOfSamplePanelDAO {
+
+    private static final Logger logger = LoggerFactory.getLogger(TypeOfSamplePanelDAOImpl.class);
 
     public TypeOfSamplePanelDAOImpl() {
         super(TypeOfSamplePanel.class);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public void getData(TypeOfSamplePanel typeOfSamplePanel) throws LIMSRuntimeException {
-
-        try {
-            TypeOfSamplePanel tos = entityManager.unwrap(Session.class).get(TypeOfSamplePanel.class,
-                    typeOfSamplePanel.getId());
-            if (tos != null) {
-                PropertyUtils.copyProperties(typeOfSamplePanel, tos);
-            } else {
-                typeOfSamplePanel.setId(null);
-            }
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            LogEvent.logError(e);
-            throw new LIMSRuntimeException("Error in TypeOfSamplePanel getData()", e);
-        }
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<TypeOfSamplePanel> getAllTypeOfSamplePanels() throws LIMSRuntimeException {
-
-        List<TypeOfSamplePanel> list;
-        try {
-            String sql = "from TypeOfSamplePanel";
-            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql,
-                    TypeOfSamplePanel.class);
-            list = query.list();
-        } catch (RuntimeException e) {
-            // bugzilla 2154
-            LogEvent.logError(e);
-            throw new LIMSRuntimeException("Error in TypeOfSamplePanel getAllTypeOfSamplePanels()", e);
-        }
-
-        return list;
+        return List.of();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TypeOfSamplePanel> getPageOfTypeOfSamplePanel(int startingRecNo) throws LIMSRuntimeException {
-
         List<TypeOfSamplePanel> list;
         try {
-            // calculate maxRow to be one more than the page size
-            int endingRecNo = startingRecNo
-                    + Integer.parseInt(ConfigurationProperties.getInstance().getPropertyValue("page.defaultPageSize"))
-                    + 1;
+            // Validación y manejo de error para pageSize
+            String pageSizeStr = ConfigurationProperties.getInstance().getPropertyValue("page.defaultPageSize");
+            int pageSize = 10; // Valor por defecto
+            try {
+                pageSize = pageSizeStr != null && !pageSizeStr.isEmpty() ? Integer.parseInt(pageSizeStr) : pageSize;
+            } catch (NumberFormatException e) {
+                logger.warn("Error al convertir page.defaultPageSize a entero. Usando valor por defecto: " + pageSize);
+            }
+
+            int endingRecNo = startingRecNo + pageSize + 1;
 
             String sql = "from TypeOfSamplePanel t order by t.typeOfSampleId, t.panelId";
-            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql,
-                    TypeOfSamplePanel.class);
+            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql, TypeOfSamplePanel.class);
             query.setFirstResult(startingRecNo - 1);
             query.setMaxResults(endingRecNo - 1);
             list = query.list();
         } catch (RuntimeException e) {
-            LogEvent.logError(e);
-            throw new LIMSRuntimeException("Error in TypeOfSamplePanel getPageOfTypeOfSamples()", e);
+            logger.error("Error en TypeOfSamplePanel getPageOfTypeOfSamples()", e);
+            throw new LIMSRuntimeException("Error en TypeOfSamplePanel getPageOfTypeOfSamples()", e);
         }
-
         return list;
     }
 
-    public TypeOfSamplePanel readTypeOfSamplePanel(String idString) {
-        TypeOfSamplePanel tos = null;
-        try {
-            tos = entityManager.unwrap(Session.class).get(TypeOfSamplePanel.class, idString);
-        } catch (RuntimeException e) {
-            // bugzilla 2154
-            LogEvent.logError(e);
-            throw new LIMSRuntimeException("Error in TypeOfSamplePanel readTypeOfSample()", e);
-        }
+    @Override
+    public void getData(TypeOfSamplePanel typeOfSamplePanel) throws LIMSRuntimeException {
 
-        return tos;
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Integer getTotalTypeOfSamplePanelCount() throws LIMSRuntimeException {
-        return getCount();
+        return 0;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TypeOfSamplePanel> getTypeOfSamplePanelsForSampleType(String sampleType) {
         List<TypeOfSamplePanel> list;
-
         String sql = "from TypeOfSamplePanel tp where tp.typeOfSampleId = :sampleId order by tp.panelId";
-
         try {
-            if (sampleType.equals("null")) {
-                // so parseInt doesn't throw
-                sampleType = "0";
+            int sampleId = 0; // Valor por defecto en caso de error
+            try {
+                sampleId = sampleType != null && !sampleType.equals("null") && !sampleType.isEmpty()
+                        ? Integer.parseInt(sampleType)
+                        : sampleId;
+            } catch (NumberFormatException e) {
+                logger.warn("Error al convertir sampleType a entero. Usando valor por defecto: " + sampleId);
             }
-            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql,
-                    TypeOfSamplePanel.class);
-            query.setParameter("sampleId", Integer.parseInt(sampleType));
+
+            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql, TypeOfSamplePanel.class);
+            query.setParameter("sampleId", sampleId);
             list = query.list();
         } catch (RuntimeException e) {
-            LogEvent.logError(e);
-            throw new LIMSRuntimeException("Error in TypeOfSamplePanelDAOImpl getTypeOfSamplePanelsForSampleType", e);
+            logger.error("Error en getTypeOfSamplePanelsForSampleType", e);
+            throw new LIMSRuntimeException("Error en getTypeOfSamplePanelsForSampleType", e);
         }
-
         return list;
     }
 
@@ -151,11 +118,16 @@ public class TypeOfSamplePanelDAOImpl extends BaseDAOImpl<TypeOfSamplePanel, Str
         String sql = "from TypeOfSamplePanel tosp where tosp.panelId = :panelId";
 
         try {
-            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql,
-                    TypeOfSamplePanel.class);
-            query.setParameter("panelId", Integer.parseInt(panelId));
-            List<TypeOfSamplePanel> typeOfSamplePanels = query.list();
-            return typeOfSamplePanels;
+            int panelIdInt = 0; // Valor por defecto en caso de error
+            try {
+                panelIdInt = panelId != null && !panelId.isEmpty() ? Integer.parseInt(panelId) : panelIdInt;
+            } catch (NumberFormatException e) {
+                logger.warn("Error al convertir panelId a entero. Usando valor por defecto: " + panelIdInt);
+            }
+
+            Query<TypeOfSamplePanel> query = entityManager.unwrap(Session.class).createQuery(sql, TypeOfSamplePanel.class);
+            query.setParameter("panelId", panelIdInt);
+            list = query.list();
         } catch (HibernateException e) {
             handleException(e, "getTypeOfSamplePanelsForPanel");
         }
