@@ -113,16 +113,6 @@
 					<textFieldExpression><![CDATA[$R{report.signValidation}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="person" pattern="">
-					<reportElement x="397" y="131" width="100" height="14" isRemoveLineWhenBlank="true" uuid="2e1415f2-bae9-481f-bc85-a33944f6e4e3">
-						<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle">
-						<font size="8" isBold="false"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$R{report.date}]]></textFieldExpression>
-				</textField>
-				<textField evaluationTime="Group" evaluationGroup="person" pattern="">
 					<reportElement x="0" y="75" width="370" height="70" isRemoveLineWhenBlank="true" uuid="cec0e8c7-d1f4-4fb8-979a-d427f4772473">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -139,43 +129,22 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$R{report.labInfomation}]]></textFieldExpression>
 				</textField>
-				<image>
-					<reportElement x="369" y="85" width="178" height="25" uuid="42abacb6-6bea-411f-9fff-f4154613ef36">
-						<printWhenExpression><![CDATA[$P{useLabDirectorSignature}]]></printWhenExpression>
-					</reportElement>
-					<imageExpression><![CDATA[$P{labDirectorSignature}]]></imageExpression>
-				</image>
-				<textField>
-					<reportElement x="397" y="110" width="100" height="10" uuid="0f4de7a7-c654-4405-bccc-6abfb9be9eb2">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
-						<property name="com.jaspersoft.studio.unit.x" value="px"/>
-						<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
-					</reportElement>
-					<textElement>
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{labDirectorName}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="397" y="120" width="100" height="10" uuid="3f77ffa2-6a30-4bcc-81ec-a817c62ca39b">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
-						<property name="com.jaspersoft.studio.unit.x" value="px"/>
-						<printWhenExpression><![CDATA[$P{useLabDirectorSignature} && $P{labDirectorTitle} != null]]></printWhenExpression>
-					</reportElement>
-					<textElement>
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{labDirectorTitle}]]></textFieldExpression>
-				</textField>
+				<frame>
+					<reportElement x="373" y="100" width="178" height="25" uuid="5d3f1dff-180a-4dee-b6ab-0b6b39362943"/>
+					<image hAlign="Center">
+						<reportElement x="-1" y="-8" width="178" height="45" uuid="42abacb6-6bea-411f-9fff-f4154613ef36">
+							<printWhenExpression><![CDATA[$P{useLabDirectorSignature}]]></printWhenExpression>
+						</reportElement>
+						<imageExpression><![CDATA[$P{labDirectorSignature}]]></imageExpression>
+					</image>
+				</frame>
 			</band>
 		</groupFooter>
 	</group>
 	<group name="Accession Number" isStartNewPage="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{accessionNumber}]]></groupExpression>
 		<groupHeader>
-			<band height="75" splitType="Prevent">
+			<band height="79" splitType="Prevent">
 				<frame>
 					<reportElement x="0" y="1" width="552" height="43" isRemoveLineWhenBlank="true" forecolor="rgba(255, 102, 102, 0.0)" backcolor="#33FFFF" uuid="b298bb54-931c-4ee2-a6b2-05fae5ce0689">
 						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
@@ -522,7 +491,7 @@
 						<textFieldExpression><![CDATA[$F{panelName}]]></textFieldExpression>
 					</textField>
 					<textField>
-						<reportElement x="0" y="-15" width="551" height="14" uuid="b6e231d2-5235-4765-ad2b-efe97d0d12f4">
+						<reportElement x="0" y="-20" width="551" height="20" uuid="b6e231d2-5235-4765-ad2b-efe97d0d12f4">
 							<printWhenExpression><![CDATA[$F{panelName} != null]]></printWhenExpression>
 						</reportElement>
 						<textElement textAlignment="Center">
@@ -635,7 +604,7 @@
 		<band splitType="Prevent"/>
 	</columnHeader>
 	<detail>
-		<band height="23" splitType="Prevent">
+		<band height="33" splitType="Prevent">
 			<rectangle>
 				<reportElement positionType="Float" mode="Opaque" x="0" y="12" width="10" height="11" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#E6E6E6" backcolor="#8BE0D1" uuid="dd8845f4-dfd2-4085-9054-3a3042bf9a12">
 					<printWhenExpression><![CDATA[$F{note} != null]]></printWhenExpression>
