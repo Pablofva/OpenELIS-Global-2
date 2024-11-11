@@ -669,7 +669,7 @@
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{testRefRange}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{testRefRange} != null && !$F{testRefRange}.isEmpty() ? $F{testRefRange} : "-"]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement stretchType="ElementGroupHeight" mode="Transparent" x="344" y="0" width="29" height="14" backcolor="#8BE0D1" uuid="4e559a62-59e2-4be1-a105-5dcaaa773bd1">
