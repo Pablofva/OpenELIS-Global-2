@@ -604,7 +604,7 @@
 		<band splitType="Prevent"/>
 	</columnHeader>
 	<detail>
-		<band height="33" splitType="Prevent">
+		<band height="14" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle>
 				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="0" height="0" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#E6E6E6" backcolor="#8BE0D1" uuid="dd8845f4-dfd2-4085-9054-3a3042bf9a12">
